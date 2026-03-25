@@ -47,7 +47,9 @@ export default function ChatRoom() {
 
   return (
     <div className="bg-zinc-900 border border-gray-700 p-6 rounded-xl shadow-lg max-w-xl mx-auto mt-5">
-      <h2 className="text-2xl font-bold text-center mb-4 text-white">💬 Chat Room</h2>
+      <h2 className="text-2xl font-bold text-center mb-4 text-white flex items-center justify-center gap-3">
+        Community Chat
+      </h2>
 
       {/* Header user */}
       {user && (
@@ -82,7 +84,7 @@ export default function ChatRoom() {
             <div
               className={`p-3 rounded-lg max-w-[75%] ${
                 msg.uid === user?.uid
-                  ? "bg-blue-500 text-white"
+                  ? "bg-emerald-500 text-white shadow-[0_0_15px_rgba(16,185,129,0.3)]"
                   : "bg-gray-700 text-white"
               }`}
             >
@@ -107,12 +109,12 @@ export default function ChatRoom() {
             type="text"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            placeholder="Ketik pesan..."
-            className="flex-1 min-w-0 p-2 rounded-lg bg-zinc-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Write a message..."
+            className="flex-1 min-w-0 p-3 rounded-xl bg-zinc-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all placeholder:text-gray-500"
           />
           <button
             type="submit"
-            className="bg-green-600 px-4 py-2 rounded-lg text-white hover:bg-green-700 w-full sm:w-auto"
+            className="bg-emerald-600 px-4 py-2 rounded-lg text-white hover:bg-emerald-700 w-full sm:w-auto"
           >
             Send
           </button>
@@ -130,7 +132,7 @@ export default function ChatRoom() {
             />
             Login with Google
           </button>
-          <p className="text-sm text-gray-400">Login untuk mengirim pesan</p>
+          <p className="text-sm text-gray-400 italic">Join the conversation to say hello!</p>
         </div>
       )}
     </div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FiX, FiGithub } from 'react-icons/fi'; // Install react-icons jika belum: npm install react-icons
+import { FiX, FiExternalLink } from 'react-icons/fi'; // Install react-icons jika belum: npm install react-icons
 
 const ProjectModal = ({ isOpen, onClose, project }) => {
   // State untuk mengontrol animasi penutupan
@@ -40,7 +40,7 @@ const ProjectModal = ({ isOpen, onClose, project }) => {
       {/* Modal Content */}
       <div
         onClick={(e) => e.stopPropagation()} // Mencegah modal tertutup saat diklik di dalam
-        className={`bg-zinc-900 border border-violet-500/50 rounded-2xl shadow-2xl shadow-violet-500/20 w-full max-w-lg transform transition-transform duration-300 ${isClosing ? 'animate-out' : 'animate-in'}`}
+        className={`bg-zinc-900 border border-emerald-500/30 rounded-2xl shadow-2xl shadow-emerald-500/10 w-full max-w-lg transform transition-transform duration-300 ${isClosing ? 'animate-out' : 'animate-in'}`}
       >
         {/* --- GAMBAR PROYEK --- */}
         <img 
@@ -69,10 +69,10 @@ const ProjectModal = ({ isOpen, onClose, project }) => {
                 href={project.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-4 inline-flex items-center justify-center gap-2 font-semibold bg-violet-600 p-3 px-5 rounded-full w-full cursor-pointer border border-transparent hover:bg-violet-700 transition-colors"
+                className="mt-4 inline-flex items-center justify-center gap-2 font-semibold bg-emerald-600 p-3 px-5 rounded-full w-full cursor-pointer border border-transparent hover:bg-emerald-500 hover:shadow-[0_0_20px_rgba(16,185,129,0.4)] transition-all duration-300 text-white"
             >
-                <FiGithub />
-                <span>Source Code</span>
+                <FiExternalLink size={20} />
+                <span>Live Preview</span>
             </a>
         </div>
       </div>

@@ -1,0 +1,52 @@
+.scroll-velocity-container {
+  width: 100% !important;
+  overflow: hidden !important;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 40px 0;
+  background: transparent;
+}
+
+.parallax {
+  overflow: hidden;
+  letter-spacing: -2px;
+  line-height: 0.8;
+  margin: 0;
+  white-space: nowrap;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.scroller {
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 80px;
+  display: flex;
+  white-space: nowrap;
+  flex-wrap: nowrap;
+  font-family: "Poppins", sans-serif;
+}
+
+.scroller span {
+  display: block;
+  margin-right: 50px;
+  background: linear-gradient(to bottom, #fff, #34d399);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: 0.8;
+}
+
+.scroller span:nth-child(even) {
+  background: linear-gradient(to bottom, #fff, #10b981);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@media (max-width: 768px) {
+  .scroller {
+    font-size: 40px;
+  }
+}

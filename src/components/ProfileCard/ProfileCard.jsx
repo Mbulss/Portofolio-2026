@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useCallback, useMemo } from "react";
+import ShinyText from "../ShinyText/ShinyText";
 import "./ProfileCard.css";
 
 const DEFAULT_BEHIND_GRADIENT =
@@ -294,37 +295,22 @@ const ProfileCardComponent = ({
         <div className="pc-inside">
           <div className="pc-shine" />
           <div className="pc-glare" />
-          <div className="pc-content pc-avatar-content">
+          <div className="pc-content" style={{ zIndex: 11 }}>
+            <div className="pc-details">
+              <h3>{name}</h3>
+              <p>{title}</p>
+            </div>
+          </div>
+
+          <div className="pc-content pc-avatar-content" style={{ zIndex: 10 }}>
             <img
               className="avatar"
               src={avatarUrl}
               alt={`${name || "User"} avatar`}
-              loading="lazy"
-              onError={(e) => {
-                const target = e.target;
-                target.style.display = "none";
-              }}
+              style={{ objectFit: 'contain' }}
             />
             {showUserInfo && (
-              <div className="pc-user-info">
-                <div className="pc-user-details">
-                  <div className="pc-mini-avatar">
-                    <img
-                      src={miniAvatarUrl || avatarUrl}
-                      alt={`${name || "User"} mini avatar`}
-                      loading="lazy"
-                      onError={(e) => {
-                        const target = e.target;
-                        target.style.opacity = "0.5";
-                        target.src = avatarUrl;
-                      }}
-                    />
-                  </div>
-                  <div className="pc-user-text">
-                    <div className="pc-handle">@{handle}</div>
-                    <div className="pc-status">{status}</div>
-                  </div>
-                </div>
+              <div className="pc-user-info-container">
                 <button
                   className="pc-contact-btn"
                   onClick={handleContactClick}
@@ -332,17 +318,12 @@ const ProfileCardComponent = ({
                   type="button"
                   aria-label={`Contact ${name || "user"}`}
                 >
-                  {contactText}
+                  <ShinyText text={contactText} speed={3} />
                 </button>
               </div>
             )}
           </div>
-          <div className="pc-content">
-            <div className="pc-details">
-              <h3>{name}</h3>
-              <p>{title}</p>
-            </div>
-          </div>
+
         </div>
       </section>
     </div>

@@ -101,7 +101,13 @@ export const ChromaGrid = ({
           }
         >
           <div className="chroma-img-wrapper">
-            <img src={c.image} alt={c.title} loading="lazy" />
+            {c.image ? (
+              <img src={c.image} alt={c.title} loading="lazy" />
+            ) : (
+              <div className="w-full h-full bg-zinc-800 flex items-center justify-center text-zinc-600">
+                No Image
+              </div>
+            )}
           </div>
           <footer className="chroma-info">
             <h3 className="name">{c.title}</h3>

@@ -1,240 +1,150 @@
-import HeroImage from "/assets/hero-img.webp";
-
-const Image = {
-  HeroImage,
-};
-
-export default Image;
-
-import Tools1 from "/assets/tools/vscode.png";
-import Tools2 from "/assets/tools/reactjs.png";
-import Tools3 from "/assets/tools/nextjs.png";
-import Tools4 from "/assets/tools/tailwind.png";
-import Tools5 from "/assets/tools/bootstrap.png";
-import Tools6 from "/assets/tools/js.png";
-import Tools7 from "/assets/tools/nodejs.png";
-import Tools8 from "/assets/tools/github.png";
-import Tools9 from "/assets/tools/ai.png";
-import Tools10 from "/assets/tools/canva.png";
-import Tools11 from "/assets/tools/figma.png";
-import Tools12 from "/assets/tools/kotlin.png";
-import Tools13 from "/assets/tools/firebase.png";
-import Tools14 from "/assets/tools/html.png";
-import Tools15 from "/assets/tools/css.png";
-import Tools16 from "/assets/tools/ts.png";
-import Tools17 from "/assets/tools/php.png";
-import Tools18 from "/assets/tools/vite.png";
-import Tools19 from "/assets/tools/mysql.png";
-
 
 export const listTools = [
-  {
-    id: 1,
-    gambar: Tools1,
-    nama: "Visual Studio Code",
-    ket: "Code Editor",
-    dad: "100",
-  },
-  {
-    id: 2,
-    gambar: Tools2,
-    nama: "React JS",
-    ket: "Framework",
-    dad: "200",
-  },
-  {
-    id: 3,
-    gambar: Tools3,
-    nama: "Next JS",
-    ket: "Framework",
-    dad: "300",
-  },
-  {
-    id: 4,
-    gambar: Tools4,
-    nama: "Tailwind CSS",
-    ket: "Framework",
-    dad: "400",
-  },
-  {
-    id: 5,
-    gambar: Tools5,
-    nama: "Bootstrap",
-    ket: "Framework",
-    dad: "500",
-  },
-  {
-    id: 6,
-    gambar: Tools6,
-    nama: "Javascript",
-    ket: "Language",
-    dad: "600",
-  },
-  {
-    id: 7,
-    gambar: Tools7,
-    nama: "Node JS",
-    ket: "Javascript Runtime",
-    dad: "700",
-  },
-  {
-    id: 8,
-    gambar: Tools8,
-    nama: "Github",
-    ket: "Repository",
-    dad: "800",
-  },
-  {
-    id: 9,
-    gambar: Tools9,
-    nama: "Adobe Illustrator",
-    ket: "Design App",
-    dad: "900",
-  },
-  {
-    id: 10,
-    gambar: Tools10,
-    nama: "Canva",
-    ket: "Design App",
-    dad: "1000",
-  },
-  {
-    id: 11,
-    gambar: Tools11,
-    nama: "Figma",
-    ket: "Design App",
-    dad: "1100",
-  },
-  {
-    id: 12,
-    gambar: Tools12,
-    nama: "Kotlin",
-    ket: "Language",
-    dad: "1200",
-  },
-  {
-    id: 13,
-    gambar: Tools13,
-    nama: "Firebase",
-    ket: "Framework",
-    dad: "1300",
-  },
-  {
-    id: 14,
-    gambar: Tools14,
-    nama: "HTML",
-    ket: "Language",
-    dad: "1400",
-  },
-  {
-    id: 15,
-    gambar: Tools15,
-    nama: "CSS",
-    ket: "Language",
-    dad: "1500",
-  },
-  {
-    id: 16,
-    gambar: Tools16,
-    nama: "TypeScript",
-    ket: "Language",
-    dad: "1600",
-  },
-  {
-    id: 17,
-    gambar: Tools17,
-    nama: "PHP",
-    ket: "Language",
-    dad: "1700",
-  },
-  {
-    id: 18,
-    gambar: Tools18,
-    nama: "Vite",
-    ket: "Framework",
-    dad: "1800",
-  },
-  {
-    id: 19,
-    gambar: Tools19,
-    nama: "MySql",
-    ket: "Framework",
-    dad: "1900",
-  },
-];
+  // Languages (ID 1-6)
+  { id: 1, gambar: "https://upload.wikimedia.org/wikipedia/en/3/30/Java_programming_language_logo.svg", nama: "Java", ket: "Enterprise & Android Dev", dad: "100" },
+  { id: 2, gambar: "https://upload.wikimedia.org/wikipedia/commons/1/18/ISO_C%2B%2B_Logo.svg", nama: "C++", ket: "Performance Systems", dad: "200" },
+  { id: 3, gambar: "https://cdn.simpleicons.org/php/777BB4", nama: "PHP", ket: "Server-side Scripting", dad: "300" },
+  { id: 4, gambar: "https://cdn.simpleicons.org/javascript/F7DF1E", nama: "JavaScript", ket: "Web Logic", dad: "400" },
+  { id: 5, gambar: "https://cdn.simpleicons.org/typescript/3178C6", nama: "TypeScript", ket: "Type-safe JS", dad: "500" },
+  { id: 6, gambar: "https://cdn.simpleicons.org/python/3776AB", nama: "Python", ket: "AI & Scripting", dad: "600" },
 
-import Proyek1 from "/assets/proyek/proyek1.jpg";
-import Proyek2 from "/assets/proyek/proyek2.jpg";
-import Proyek3 from "/assets/proyek/proyek3.jpg";
-import Proyek4 from "/assets/proyek/proyek4.jpg";
-import Proyek5 from "/assets/proyek/proyek5.jpg";
-import Proyek6 from "/assets/proyek/proyek6.jpg";
+  // AI & Data Science (ID 7-14 + 34, 35)
+  { id: 7, gambar: "https://cdn.simpleicons.org/scikitlearn/F7931E", nama: "Scikit-learn", ket: "Machine Learning Library", dad: "700" },
+  { id: 8, gambar: "https://cdn.simpleicons.org/pandas/150458", nama: "Pandas", ket: "Data Analysis", dad: "800" },
+  { id: 9, gambar: "https://cdn.simpleicons.org/numpy/013243", nama: "NumPy", ket: "Numerical Computing", dad: "900" },
+  { id: 10, gambar: "https://cdn.simpleicons.org/tensorflow/FF6F00", nama: "TensorFlow", ket: "Deep Learning Framework", dad: "1000" },
+  { id: 11, gambar: "https://cdn.simpleicons.org/keras/D00000", nama: "Keras", ket: "High-level Neural Networks", dad: "1100" },
+  { id: 12, gambar: "https://cdn.simpleicons.org/jupyter/F37626", nama: "Jupyter", ket: "Interactive Notebooks", dad: "1200" },
+  { id: 13, gambar: "https://cdn.simpleicons.org/pytorch/EE4C2C", nama: "PyTorch", ket: "Dynamic AI Research", dad: "1300" },
+  { id: 14, gambar: "https://cdn.simpleicons.org/opencv/5C3EE8", nama: "OpenCV", ket: "Computer Vision", dad: "1400" },
+  { id: 34, gambar: "https://cdn.simpleicons.org/huggingface/FFD21E", nama: "Hugging Face", ket: "AI Model Hosting", dad: "1410" },
+  { id: 35, gambar: "https://cdn.simpleicons.org/streamlit/FF4B4B", nama: "Streamlit", ket: "ML App Framework", dad: "1420" },
+
+  // Frontend (ID 15-21)
+  { id: 15, gambar: "https://cdn.simpleicons.org/nextdotjs/white", nama: "Next.js", ket: "React Framework", dad: "1500" },
+  { id: 16, gambar: "https://cdn.simpleicons.org/vite/646CFF", nama: "Vite", ket: "Modern Build Tool", dad: "1600" },
+  { id: 17, gambar: "https://cdn.simpleicons.org/react/61DAFB", nama: "React", ket: "UI Library", dad: "1700" },
+  { id: 18, gambar: "https://cdn.simpleicons.org/tailwindcss/06B6D4", nama: "Tailwind", ket: "Utility-first CSS", dad: "1800" },
+  { id: 19, gambar: "https://cdn.simpleicons.org/framer/black", nama: "Framer Motion", ket: "Web Animations", dad: "1900" },
+  { id: 20, gambar: "https://cdn.simpleicons.org/html5/E34F26", nama: "HTML5", ket: "Web Structure", dad: "2000" },
+  { id: 21, gambar: "https://upload.wikimedia.org/wikipedia/commons/6/62/CSS3_logo.svg", nama: "CSS3", ket: "Web Styling", dad: "2100" },
+
+  // Backend & DB (ID 22-26)
+  { id: 22, gambar: "https://cdn.simpleicons.org/mysql/4479A1", nama: "MySQL", ket: "Relational Database", dad: "2200" },
+  { id: 23, gambar: "https://cdn.simpleicons.org/supabase/3FCF8E", nama: "Supabase", ket: "Backend as a Service", dad: "2300" },
+  { id: 24, gambar: "https://cdn.simpleicons.org/mongodb/47A248", nama: "MongoDB", ket: "NoSQL Database", dad: "2400" },
+  { id: 25, gambar: "https://cdn.simpleicons.org/socketdotio/white", nama: "Socket.io", ket: "Real-time Engine", dad: "2500" },
+  { id: 26, gambar: "https://cdn.simpleicons.org/firebase/FFCA28", nama: "Firebase", ket: "Cloud Services", dad: "2600" },
+
+  // Tools & DevOps (ID 27-33 + 36, 37)
+  { id: 27, gambar: "https://cdn.simpleicons.org/git/F05032", nama: "Git", ket: "Version Control", dad: "2700" },
+  { id: 28, gambar: "https://cdn.simpleicons.org/github/white", nama: "GitHub", ket: "Code Hosting", dad: "2800" },
+  { id: 29, gambar: "https://cdn.simpleicons.org/vercel/white", nama: "Vercel", ket: "Deployment Platform", dad: "2900" },
+  { id: 30, gambar: "https://cdn.simpleicons.org/postman/FF6C37", nama: "Postman", ket: "API Testing", dad: "3000" },
+  { id: 31, gambar: "https://cdn.simpleicons.org/googlecloud/4285F4", nama: "GCP", ket: "Cloud Infrastructure", dad: "3100" },
+  { id: 32, gambar: "https://cdn.simpleicons.org/ubuntu/E94321", nama: "Ubuntu", ket: "Linux OS", dad: "3200" },
+  { id: 33, gambar: "https://cdn.simpleicons.org/docker/2496ED", nama: "Docker", ket: "Containerization", dad: "3300" },
+  { id: 36, gambar: "https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg", nama: "AWS", ket: "Cloud Platform", dad: "3600" },
+  { id: 37, gambar: "https://upload.wikimedia.org/wikipedia/commons/b/b9/AWS_Simple_Icons_Compute_Amazon_EC2_Instances.svg", nama: "AWS EC2", ket: "Scalable Compute Service", dad: "3700" },
+];
 
 export const listProyek = [
   {
     id: 1,
-    image: Proyek1,
-    title: "AIS Detection App",
-    subtitle: "A mobile application powered by Artificial Intelligence...",
-    fullDescription:"A mobile application powered by Artificial Intelligence and Machine Learning, developed to assist in the early detection of Adolescent Idiopathic Scoliosis (AIS). By analyzing patient data and patterns, the app provides predictions that can help doctors and patients take preventive measures. This project demonstrates the role of AI in modern healthcare by improving accuracy, accessibility, and efficiency in medical diagnosis.",
+    image: "", 
+    title: "Tsunami Risk Prediction",
+    subtitle: "ML-based tsunami prediction model using BMKG data (IEEE Accepted)",
+    fullDescription: "Developing a machine learning-based tsunami prediction model using BMKG data (2008-2024). Using Python, Scikit-learn, Pandas, and XGBoost with results of AUC 0.96 and Accuracy 0.85. This project was accepted by IEEE.",
     borderColor: "#3B82F6",
     gradient: "linear-gradient(145deg, #3B82F6, #000)",
-    url: "https://github.com/rissss21",
+    url: "https://your-tsunami-demo.vercel.app", 
     dad: "100",
   },
   {
     id: 2,
-    image: Proyek2,
-    title: "IoT Air Quality Monitoring",
-    subtitle: "A smart IoT system designed to measure and analyze air quality...",
-    fullDescription:"A smart IoT system designed to measure and analyze air quality using sensors connected to a mobile application. The app provides real-time updates on air quality levels, empowering users to make healthier lifestyle decisions based on environmental conditions. This project showcases the potential of IoT in addressing environmental and public health issues.",
+    image: "", 
+    title: "Hishiro Ticketing System",
+    subtitle: "Full-stack ticketing system with AI chatbot (Copyrighted)",
+    fullDescription: "A full-stack ticketing system using React, Node.js, MongoDB, Firebase, and Docker. Features include admin dashboard, real-time chat, and an AI chatbot for FAQs. This system is officially copyrighted.",
     borderColor: "#10B981",
     gradient: "linear-gradient(180deg, #10B981, #000)",
-    url: "https://github.com/rissss21",
+    url: "https://hishiro-ticketing.onrender.com",
     dad: "200",
   },
   {
     id: 3,
-    image: Proyek3,
-    title: "IoT Heartbeat Monitoring System",
-    subtitle: "An IoT-based healthcare project developed to measure and monitor...",
-    fullDescription:"An IoT-based healthcare project developed to measure and monitor heart rate in real-time. The system connects sensors to a local web server, enabling users and healthcare providers to track data directly from a web interface. This project highlights the integration of hardware and software to create efficient medical solutions that can be applied in local clinics or personal health monitoring.",
-    borderColor: "#3B82F6",
-    gradient: "linear-gradient(145deg, #3B82F6, #000)",
-    url: "https://github.com/rissss21",
+    image: "", 
+    title: "Multimodal Deepfake Detection",
+    subtitle: "AI project with Adaptive Fusion and Xception-based neural networks",
+    fullDescription: "A multimodal deepfake detection system using audio and visual inputs. Built with Xception-based neural networks and adaptive fusion to dynamically weight predictions. Achieved 99%+ accuracy on FakeAVCeleb dataset.",
+    borderColor: "#A855F7",
+    gradient: "linear-gradient(145deg, #A855F7, #000)",
+    url: "https://deepfake-detector-ai.streamlit.app",
     dad: "300",
   },
   {
     id: 4,
-    image: Proyek4,
-    title: "Personal Web Portfolio",
-    subtitle: "An interactive web portfolio showcasing my professional journey...",
-    fullDescription:"An interactive web portfolio showcasing my professional journey, skills, and projects. Designed with a clean yet modern aesthetic, the portfolio highlights my technical expertise in web development, software engineering, and IoT. The site also serves as a central hub for potential employers and collaborators to explore my works, reflecting both my creativity and technical precision.",
-    borderColor: "#10B981",
-    gradient: "linear-gradient(180deg, #10B981, #000)",
-    url: "https://github.com/rissss21",
+    image: "", 
+    title: "Automated Attendance System",
+    subtitle: "Facial recognition system using OpenCV and Firebase",
+    fullDescription: "Using OpenCV and face_recognition to detect and record attendance automatically. Connected to Firebase for real-time data synchronization and a simple user interface.",
+    borderColor: "#F59E0B",
+    gradient: "linear-gradient(180deg, #F59E0B, #000)",
+    url: "https://face-attendance-system.web.app",
     dad: "400",
   },
-    {
+  {
     id: 5,
-    image: Proyek5,
-    title: "Color Blindness Detection App",
-    subtitle: "A cross-platform application available on both mobile and desktop...",
-    fullDescription:"A cross-platform application available on both mobile and desktop, created to help identify different types of color blindness through color recognition tests. The app provides users with instant results, making it useful for educational, medical, and self-assessment purposes. Its intuitive design and accessibility aim to support individuals in understanding and managing color vision deficiencies.",
-    borderColor: "#3B82F6",
-    gradient: "linear-gradient(145deg, #3B82F6, #000)",
-    url: "https://github.com/rissss21",
+    image: "", 
+    title: "Finance Tracker AI",
+    subtitle: "Full-stack personal finance tracker with Next.js 14, Supabase, and Telegram integration",
+    fullDescription: "A modern personal finance application that enables users to track income and expenses via web or Telegram. Features include AI-powered receipt parsing, real-time analytics with Recharts, savings management (Savings Pots), and a PWA-ready responsive layout. Integrated with Gemini/Groq for intelligent financial assistance.",
+    borderColor: "#10B981",
+    gradient: "linear-gradient(145deg, #059669, #000)",
+    url: "https://finance-tracker-gamma-livid.vercel.app/",
     dad: "500",
   },
+];
+
+export const listAchievements = [
   {
-    id: 6,
-    image: Proyek6,
-    title: "Coffee Shop Website",
-    subtitle: "A fully functional website designed for a coffee shop, enabling...",
-    fullDescription:"A fully functional website designed for a coffee shop, enabling customers to explore the menu, learn about the shop’s story, and place orders online. The project focused on creating an attractive and modern interface, integrating responsive design for mobile and desktop, and ensuring smooth navigation for users. This website not only improved customer experience but also supported the coffee shop’s digital presence and business growth.",
-    borderColor: "#10B981",
-    gradient: "linear-gradient(180deg, #10B981, #000)",
-    url: "https://github.com/rissss21",
-    dad: "600",
+    type: "publication",
+    id: 1,
+    title: "Tsunami Risk Prediction using Machine Learning",
+    journal: "IEEE Xplore (Accepted)",
+    date: "2024",
+    description: "Research on predicting tsunami risks using historical BMKG data with XGBoost and Random Forest. Achieving AUC 0.96.",
+    url: "https://ieeexplore.ieee.org/abstract/document/11389449", 
+    dad: "1000",
   },
+  {
+    type: "certificate",
+    id: 2,
+    title: "AWS Academy - Generative AI Foundations",
+    issuer: "AWS Academy",
+    date: "Sep 23, 2025",
+    image: "/assets/achievements/AWSAcademy.jpg", 
+    url: "https://www.credly.com/badges/5fc34e1a-c7ad-4adb-aee9-4244402f7526",
+    dad: "1100",
+  },
+  {
+    type: "certificate",
+    id: 3,
+    title: "Google Colab Python",
+    issuer: "Great Learning Academy",
+    date: "Dec 2023",
+    image: "/assets/achievements/collab.jpg", 
+    url: "https://verify.mygreatlearning.com/GOUWYUUU",
+    dad: "1200",
+  },
+  {
+    type: "certificate",
+    id: 4,
+    title: "Java (Basic) Skill Assessment",
+    issuer: "HackerRank",
+    date: "May 13, 2024",
+    image: "/assets/achievements/java.png", 
+    url: "https://www.hackerrank.com/certificates/c12c3d084454",
+    dad: "1300",
+  }
 ];
