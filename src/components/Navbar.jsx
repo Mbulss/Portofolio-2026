@@ -24,8 +24,7 @@ const Navbar = ({ hidden = false }) => {
       <style>
         {`
           .fixed-nav-forced {
-            z-index: 999999 !important;
-            transform: translate3d(0, 0, 9999px) !important;
+            z-index: 1000 !important;
           }
         `}
       </style>
@@ -37,22 +36,22 @@ const Navbar = ({ hidden = false }) => {
         }`}
       >
         <div 
-          className={`flex items-center justify-center px-10 py-3 rounded-full border transition-all duration-500 max-w-fit shadow-2xl ${
+          className={`flex items-center justify-between px-3 sm:px-10 py-2 sm:py-3 rounded-full border transition-all duration-500 w-auto max-w-[96vw] shadow-2xl ${
             scrolled 
-              ? "bg-black/80 backdrop-blur-2xl border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.8)]" 
+              ? "bg-black/90 backdrop-blur-3xl border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.8)]" 
               : "bg-transparent border-transparent"
           }`}
         >
           {/* Navigation Menu */}
-          <ul className="flex items-center gap-10">
+          <ul className="flex items-center gap-2 sm:gap-10">
             {navLinks.map((link) => (
               <li key={link.name}>
                 <a 
                   href={link.href} 
-                  className="text-sm font-semibold text-gray-400 hover:text-emerald-400 transition-colors relative group tracking-wide"
+                  className="text-[10px] sm:text-sm font-semibold text-gray-400 hover:text-emerald-400 transition-colors relative group tracking-tight whitespace-nowrap"
                 >
                   {link.name}
-                  <span className="absolute -bottom-1.5 left-0 w-0 h-0.5 bg-emerald-400 transition-all duration-300 group-hover:w-full shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-400 transition-all duration-300 group-hover:w-full shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
                 </a>
               </li>
             ))}
@@ -60,7 +59,7 @@ const Navbar = ({ hidden = false }) => {
             <li>
               <a 
                 href="#contact" 
-                className="text-sm font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-5 py-2 rounded-full hover:bg-emerald-500 hover:text-black transition-all transform hover:scale-105 active:scale-95 shadow-lg shadow-emerald-500/10"
+                className="text-[10px] sm:text-sm font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-3 sm:px-6 py-1.5 sm:py-2.5 rounded-full hover:bg-emerald-500 hover:text-black transition-all transform hover:scale-105 active:scale-95 shadow-lg shadow-emerald-500/10 whitespace-nowrap"
               >
                 Hire Me
               </a>

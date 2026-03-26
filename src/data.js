@@ -51,57 +51,67 @@ export const listTools = [
 export const listProyek = [
   {
     id: 1,
-    image: "", 
+    image: "/assets/projects/tsunami.jpg", 
+    video: "https://vjs.zencdn.net/v/oceans.mp4", // Placeholder video
     title: "Tsunami Risk Prediction",
-    subtitle: "ML-based tsunami prediction model using BMKG data (IEEE Accepted)",
-    fullDescription: "Developing a machine learning-based tsunami prediction model using BMKG data (2008-2024). Using Python, Scikit-learn, Pandas, and XGBoost with results of AUC 0.96 and Accuracy 0.85. This project was accepted by IEEE.",
+    subtitle: "ML-based tsunami prediction model using BMKG data",
+    fullDescription: "Developing a machine learning-based tsunami prediction model using BMKG data (2008-2024). Using Python, Scikit-learn, Pandas, and XGBoost with results of AUC 0.96 and Accuracy 0.85.",
     borderColor: "#3B82F6",
     gradient: "linear-gradient(145deg, #3B82F6, #000)",
     url: "https://your-tsunami-demo.vercel.app", 
+    githubUrl: "https://github.com/haniifwardana/tsunami-risk-prediction",
     dad: "100",
   },
   {
     id: 2,
-    image: "", 
+    image: "/assets/projects/hishiro.jpg", 
+    video: "", 
     title: "Hishiro Ticketing System",
     subtitle: "Full-stack ticketing system with AI chatbot (Copyrighted)",
     fullDescription: "A full-stack ticketing system using React, Node.js, MongoDB, Firebase, and Docker. Features include admin dashboard, real-time chat, and an AI chatbot for FAQs. This system is officially copyrighted.",
     borderColor: "#10B981",
     gradient: "linear-gradient(180deg, #10B981, #000)",
     url: "https://hishiro-ticketing.onrender.com",
+    githubUrl: "https://github.com/haniifwardana/hishiro-ticketing",
     dad: "200",
   },
   {
     id: 3,
-    image: "", 
+    image: "/assets/projects/deepfake.jpg", 
+    video: "https://vjs.zencdn.net/v/oceans.mp4", 
     title: "Multimodal Deepfake Detection",
     subtitle: "AI project with Adaptive Fusion and Xception-based neural networks",
     fullDescription: "A multimodal deepfake detection system using audio and visual inputs. Built with Xception-based neural networks and adaptive fusion to dynamically weight predictions. Achieved 99%+ accuracy on FakeAVCeleb dataset.",
     borderColor: "#A855F7",
     gradient: "linear-gradient(145deg, #A855F7, #000)",
     url: "https://deepfake-detector-ai.streamlit.app",
+    githubUrl: "https://github.com/haniifwardana/deepfake-detection",
     dad: "300",
   },
   {
     id: 4,
-    image: "", 
+    image: "/assets/projects/attendance.jpg", 
+    video: "", 
     title: "Automated Attendance System",
     subtitle: "Facial recognition system using OpenCV and Firebase",
     fullDescription: "Using OpenCV and face_recognition to detect and record attendance automatically. Connected to Firebase for real-time data synchronization and a simple user interface.",
     borderColor: "#F59E0B",
     gradient: "linear-gradient(180deg, #F59E0B, #000)",
     url: "https://face-attendance-system.web.app",
+    githubUrl: "https://github.com/haniifwardana/face-attendance",
     dad: "400",
   },
   {
     id: 5,
-    image: "", 
+    image: "/assets/projects/finance.jpg", 
+    video: "https://vjs.zencdn.net/v/oceans.mp4", 
     title: "Finance Tracker AI",
     subtitle: "Full-stack personal finance tracker with Next.js 14, Supabase, and Telegram integration",
     fullDescription: "A modern personal finance application that enables users to track income and expenses via web or Telegram. Features include AI-powered receipt parsing, real-time analytics with Recharts, savings management (Savings Pots), and a PWA-ready responsive layout. Integrated with Gemini/Groq for intelligent financial assistance.",
     borderColor: "#10B981",
     gradient: "linear-gradient(145deg, #059669, #000)",
     url: "https://finance-tracker-gamma-livid.vercel.app/",
+    githubUrl: "https://github.com/haniifwardana/finance-tracker-ai",
     dad: "500",
   },
 ];
@@ -111,7 +121,7 @@ export const listAchievements = [
     type: "publication",
     id: 1,
     title: "Tsunami Risk Prediction using Machine Learning",
-    journal: "IEEE Xplore (Accepted)",
+    journal: "IEEE Xplore",
     date: "2024",
     description: "Research on predicting tsunami risks using historical BMKG data with XGBoost and Random Forest. Achieving AUC 0.96.",
     url: "https://ieeexplore.ieee.org/abstract/document/11389449", 
@@ -146,5 +156,44 @@ export const listAchievements = [
     image: "/assets/achievements/java.png", 
     url: "https://www.hackerrank.com/certificates/c12c3d084454",
     dad: "1300",
+  }
+];
+
+export const listJourney = [
+  {
+    id: 1,
+    title: "High School Diploma",
+    location: "International Islamic High School (IIHS)",
+    date: "Jul 2021 - Jul 2023",
+    description: "Completed an accelerated 2-year High School program in Learning Sciences.",
+    icon: "education",
+    category: "Education"
+  },
+  {
+    id: 2,
+    title: "Summer School Program",
+    location: "Braemar College, Toronto",
+    date: "Jul 2022 - Aug 2022",
+    description: "Participated in an intensive communication and English language program in Toronto, Canada.",
+    icon: "education",
+    category: "Education"
+  },
+  {
+    id: 3,
+    title: "Computer Science Student",
+    location: "BINUS International University",
+    date: "2023 - 2027",
+    description: "Pursuing a degree in Computer Science. Gaining expertise in Full-Stack Development, Data Science, AI, Cybersecurity. ETC.",
+    icon: "education",
+    category: "Education"
+  },
+  {
+    id: 4,
+    title: "Web Developer Internship",
+    location: "Kementrian Komunikasi dan Digital (Komdigi)",
+    date: "Feb 2026 - Present",
+    description: "Contributing as a Web Developer intern at the Ministry of Communication and Digital Affairs, focusing on public sector digital solutions.",
+    icon: "work",
+    category: "Experience"
   }
 ];

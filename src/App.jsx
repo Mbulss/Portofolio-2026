@@ -12,9 +12,12 @@ import CursorFollower from "./components/CursorFollower";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ScrollVelocity from "./components/ScrollVelocity/ScrollVelocity";
+import Journey from "./components/Journey/Journey";
+import Card3DViewer from "./components/Card3DViewer/Card3DViewer";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { motion, AnimatePresence } from "framer-motion";
+import { RiGraduationCapFill, RiVerifiedBadgeFill, RiArrowRightLine, RiExternalLinkLine, RiMailSendLine, RiMapPinLine } from "react-icons/ri";
 
 function App() {
   const aboutRef = useRef(null);
@@ -31,15 +34,7 @@ function App() {
     setSelectedProject(null);
   };
 
-  useEffect(() => {
-    const isReload =
-      performance.getEntriesByType("navigation")[0]?.type === "reload";
-
-    if (isReload) {
-      const baseUrl = window.location.origin + "/portofolio/";
-      window.location.replace(baseUrl);
-    }
-  }, []);
+  // Removed redundant reload/redirect logic to improve performance
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -57,12 +52,23 @@ function App() {
     }
 
     AOS.init({
-      duration: 1000,
+      duration: 600, // Faster animations for better feel
       once: true,
-      easing: 'ease-in-out',
+      easing: 'ease-out',
+      offset: 50, // Trigger earlier
+      delay: 0,
     });
 
     return () => observer.disconnect();
+  }, []);
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 1024);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   return (
@@ -79,59 +85,87 @@ function App() {
       
       <main className="w-full relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="hero grid md:grid-cols-2 items-center pt-24 xl:gap-0 gap-6 grid-cols-1">
-            <div className="animate__animated animate__fadeInUp animate__delay-3s">
-              <h1 className="text-5xl font-bold mb-6">
+          <div className="hero grid md:grid-cols-2 flex-col items-center pt-24 gap-8 md:gap-16">
+            {/* Left Col (Desktop) / Main Container (Mobile) */}
+            <div className="flex flex-col items-center md:items-start text-center md:text-left animate__animated animate__fadeInUp animate__delay-3s order-1">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
                 <ShinyText text="Hi I'm Haniif Satria Wardana" disabled={false} speed={3} className='custom-class' />
               </h1>
+              
+              <div className="md:hidden w-full flex justify-center mb-8 animate__animated animate__zoomIn animate__delay-1s">
+                <div className="relative w-fit">
+                  <ProfileCard
+                    name="Haniif Satria W"
+                    title="Full Stack Developer / AI Enthusiast"
+                    handle="haniifwardana"
+                    status="Online"
+                    contactText="Contact Me"
+                    avatarUrl="/assets/Haniif.png"
+                    showUserInfo={true}
+                    enableTilt={true}
+                    enableMobileTilt={true}
+                    onContactClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                  />
+                </div>
+              </div>
+
               <BlurText
-                text="Bridging the world of Artificial Intelligence and Full-Stack Development. Dual-enrolled at Binus International & RMIT Melbourne. I thrive on turning heavy data into seamless user experiences. If it can be optimized with AI, I’m probably already working on it."
+                text="Bridging the world of Artificial Intelligence and Full-Stack Development. Dual-enrolled at Binus International & RMIT Melbourne. I thrive on turning heavy data into seamless user experiences."
                 delay={100}
                 animateBy="words"
                 direction="top"
-                className=" mb-6"
+                className="mb-8 opacity-80"
               />
-              <div className="flex items-center sm:gap-4 gap-2">
+              
+              <div className="flex flex-col sm:flex-row items-center sm:gap-4 gap-4 w-full sm:w-auto mt-4">
                 <a 
-                  href="./assets/CV.pdf" 
+                  href="/assets/CV.pdf" 
                   download="Haniif_Satria_Wardana_CV.pdf" 
-                  className="font-semibold bg-[#1a1a1a] p-4 px-6 rounded-full border border-gray-700 hover:bg-[#222] hover:border-emerald-400 hover:shadow-[0_0_20px_rgba(52,211,153,0.3)] transition-all duration-300"
+                  className="w-full sm:w-auto text-center font-semibold bg-[#1a1a1a] p-4 px-8 rounded-full border border-gray-700 hover:bg-[#222] hover:border-emerald-400 hover:shadow-[0_0_20px_rgba(52,211,153,0.3)] transition-all duration-300"
                 >
                   <ShinyText text="Download CV" disabled={false} speed={3} className="custom-class" />
                 </a>
 
-                <a href="#project" className="font-semibold bg-[#1a1a1a] p-4 px-6 rounded-full border border-gray-700 hover:bg-[#222] hover:border-emerald-400 hover:shadow-[0_0_20px_rgba(52,211,153,0.3)] transition-all duration-300">
+                <a href="#project" className="w-full sm:w-auto text-center font-semibold bg-[#1a1a1a] p-4 px-8 rounded-full border border-gray-700 hover:bg-[#222] hover:border-emerald-400 hover:shadow-[0_0_20px_rgba(52,211,153,0.3)] transition-all duration-300">
                   <ShinyText text="Explore My Projects" disabled={false} speed={3} className="custom-class" />
                 </a>
               </div>
             </div>
-            <div className="md:ml-auto animate__animated animate__fadeInUp animate__delay-4s">
-              <ProfileCard
-                name="Haniif Satria W"
-                title="Full Stack Developer / AI Enthusiast"
-                handle="haniifwardana"
-                status="Online"
-                contactText="Contact Me"
-                avatarUrl="./assets/Haniif.png"
-                showUserInfo={true}
-                enableTilt={true}
-                enableMobileTilt={false}
-                onContactClick={() => console.log('Contact clicked')}
-              />
+
+            {/* Right Col (Desktop) / Hidden on Mobile */}
+            <div className="hidden md:flex justify-center items-center md:ml-auto animate__animated animate__fadeInUp animate__delay-4s order-2">
+              <div className="relative w-full max-w-[420px]">
+                <ProfileCard
+                  name="Haniif Satria W"
+                  title="Full Stack Developer / AI Enthusiast"
+                  handle="haniifwardana"
+                  status="Online"
+                  contactText="Contact Me"
+                  avatarUrl="/assets/Haniif.png"
+                  showUserInfo={true}
+                  enableTilt={true}
+                  enableMobileTilt={false}
+                  onContactClick={() => console.log('Contact clicked')}
+                />
+              </div>
             </div>
           </div>
 
           {/* About Section */}
-          <div className="mt-32 mx-auto w-full max-w-[1600px] rounded-3xl border-[5px] border-emerald-500/20 shadow-[0_0_30px_rgba(16,185,129,0.2)] bg-gradient-to-br from-[#0a0a0a] via-[#111111] to-[#1a1a1a] p-6" id="about">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-10 pt-0 px-8" data-aos="fade-up">
-              <div className="basis-full md:basis-5/12 pr-0 md:pr-8 border-b md:border-b-0 md:border-r border-emerald-500/20 overflow-hidden max-w-full flex justify-center ">
-                <Lanyard position={[0, 0, 15]} gravity={[0, -40, 0]} />
+          <div className="mt-32 mx-auto w-full max-w-[1600px] rounded-3xl border-[5px] border-emerald-500/20 shadow-[0_0_30px_rgba(16,185,129,0.2)] bg-gradient-to-br from-[#0a0a0a] via-[#111111] to-[#1a1a1a] p-4 sm:p-10" id="about">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-10 pt-0 px-2 sm:px-8" data-aos="fade-up">
+              <div className="basis-full md:basis-5/12 pr-0 md:pr-8 border-none md:border-b-0 md:border-r md:border-emerald-500/20 overflow-visible max-w-full flex justify-center py-0 sm:py-0 min-h-[400px] md:min-h-0">
+                {isMobile ? (
+                  <Card3DViewer />
+                ) : (
+                  <Lanyard position={[0, 0, 15]} gravity={[0, -40, 0]} />
+                )}
               </div>
 
-              <div className="basis-full md:basis-7/12 pl-0 md:pl-8">
+              <div className="basis-full md:basis-7/12 pl-0 md:pl-8 py-4 sm:py-0">
                 <div className="flex-1 text-left">
-                  <h2 className="text-3xl md:text-4xl font-bold text-white mb-5">
-                    About Me
+                  <h2 className="text-3xl md:text-4xl font-bold mb-5 tracking-tight">
+                    <ShinyText text="About Me" speed={3} />
                   </h2>
 
                   <BlurText
@@ -139,7 +173,7 @@ function App() {
                     delay={50}
                     animateBy="words"
                     direction="top"
-                    className="text-base md:text-lg leading-relaxed mb-10 text-gray-300"
+                    className="text-sm sm:text-base md:text-lg leading-relaxed mb-10 text-gray-300"
                   />
 
                   <div className="flex flex-col sm:flex-row items-center sm:justify-between text-center sm:text-left gap-y-8 sm:gap-y-0 mb-4 w-full">
@@ -175,12 +209,16 @@ function App() {
           </div>
         </div>
 
+        <Journey />
+
         {/* Full-width sections start here */}
         
         {/* Tools Section */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="tools mt-32">
-            <h1 className="text-4xl font-bold mb-4" data-aos="fade-up">Tools & Technologies</h1>
+          <div className="tools mt-10">
+            <h1 className="text-4xl font-bold mb-4 tracking-tight" data-aos="fade-up">
+              <ShinyText text="Tools & Technologies" speed={3} />
+            </h1>
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10" data-aos="fade-up">
               <p className="w-full md:w-2/5 text-base opacity-50">My Professional Skills & Technical Arsenal</p>
               
@@ -311,89 +349,107 @@ function App() {
 
           {/* Achievements & Publications Section */}
           <div className="achievements mt-32" id="achievements">
-            <h1 className="text-4xl font-bold mb-4" data-aos="fade-up">Certificates & Publications</h1>
-            <p className="text-base opacity-50 mb-12" data-aos="fade-up">Formal Recognition & Academic Research</p>
+            <h1 className="text-4xl font-bold mb-12 tracking-tight" data-aos="fade-up">
+              <ShinyText text="Certificates & Publications" speed={3} />
+            </h1>
 
-            <div className="grid lg:grid-cols-2 gap-8">
+            <div className="grid lg:grid-cols-2 gap-12">
               {/* Publications Side */}
-              <div className="flex flex-col gap-6" data-aos="fade-right">
-                <h3 className="text-xl font-semibold text-emerald-400 flex items-center gap-2">
-                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                  </svg>
+              <div className="flex flex-col gap-8">
+                <motion.h3 
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  className="text-2xl font-bold text-emerald-400 flex items-center gap-3"
+                >
+                  <RiGraduationCapFill className="w-8 h-8" />
                   Academic Publications
-                </h3>
-                {listAchievements.filter(a => a.type === "publication").map(pub => (
-                  <div key={pub.id} className="p-6 rounded-2xl bg-zinc-900/50 border border-zinc-800 hover:border-emerald-500/50 transition-all duration-300 group">
-                    <div className="flex justify-between items-start mb-4">
-                      <span className="text-xs font-bold uppercase tracking-wider bg-emerald-500/10 text-emerald-500 px-3 py-1 rounded-full border border-emerald-500/20">
-                        {pub.journal}
-                      </span>
-                      <span className="text-sm text-zinc-500 font-mono">{pub.date}</span>
-                    </div>
-                    <h4 className="text-xl font-bold text-white mb-3 group-hover:text-emerald-400 transition-colors uppercase tracking-tight">{pub.title}</h4>
-                    <p className="text-zinc-400 text-sm leading-relaxed mb-6 italic">"{pub.description}"</p>
-                    <a 
-                      href={pub.url} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-emerald-500 font-semibold hover:gap-3 transition-all underline decoration-emerald-500/30 underline-offset-4"
+                </motion.h3>
+                <div className="flex flex-col gap-6">
+                  {listAchievements.filter(a => a.type === "publication").map((pub, idx) => (
+                    <motion.div 
+                      key={pub.id}
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ delay: idx * 0.1 }}
+                      viewport={{ once: true }}
+                      className="p-8 rounded-3xl bg-zinc-900/40 backdrop-blur-xl border border-white/5 hover:border-emerald-500/30 transition-all duration-500 group relative overflow-hidden"
                     >
-                      Read Publication <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
-                    </a>
-                  </div>
-                ))}
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 blur-3xl -z-10 group-hover:bg-emerald-500/10 transition-colors" />
+                      <div className="flex justify-between items-start mb-6">
+                        <span className="text-[10px] font-black uppercase tracking-[0.2em] bg-emerald-500/10 text-emerald-500 px-4 py-1.5 rounded-full border border-emerald-500/20">
+                          {pub.journal}
+                        </span>
+                        <span className="text-sm text-zinc-600 font-mono font-bold tracking-tighter">{pub.date}</span>
+                      </div>
+                      <h4 className="text-2xl font-black text-white mb-4 group-hover:text-emerald-400 transition-colors leading-tight uppercase">{pub.title}</h4>
+                      <p className="text-zinc-500 text-sm leading-relaxed mb-8 font-medium line-clamp-3 italic">"{pub.description}"</p>
+                      <a 
+                        href={pub.url} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-3 text-emerald-500 font-black text-xs tracking-widest hover:gap-5 transition-all group/link"
+                      >
+                        ACCESS RESEARCH <RiArrowRightLine className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
+                      </a>
+                    </motion.div>
+                  ))}
+                </div>
               </div>
 
               {/* Certificates Side */}
-              <div className="flex flex-col gap-6" data-aos="fade-left">
-                <h3 className="text-xl font-semibold text-emerald-400 flex items-center gap-2">
-                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                  </svg>
-                  Professional Certificates
-                </h3>
-                <div className="grid sm:grid-cols-2 gap-4">
-                  {listAchievements.filter(a => a.type === "certificate").map(cert => (
-                    <div key={cert.id} className="group relative overflow-hidden rounded-xl bg-zinc-900/30 border border-zinc-800 hover:border-emerald-500/50 transition-all flex flex-col h-full shadow-lg">
-                      {/* Thumbnail Preview Area */}
-                      <div className="h-32 w-full overflow-hidden bg-zinc-800/20 relative">
-                        {cert.image ? (
+              <div className="flex flex-col gap-8">
+                <motion.h3 
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  className="text-2xl font-bold text-emerald-400 flex items-center gap-3"
+                >
+                  <RiVerifiedBadgeFill className="w-8 h-8" />
+                  Professional Certifications
+                </motion.h3>
+                <div className="grid sm:grid-cols-2 gap-6">
+                  {listAchievements.filter(a => a.type === "certificate").map((cert, idx) => (
+                    <motion.div 
+                      key={cert.id}
+                      initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                      whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                      transition={{ delay: idx * 0.1 }}
+                      viewport={{ once: true }}
+                      whileHover={{ y: -10, rotateZ: idx % 2 === 0 ? 1 : -1 }}
+                      className="group relative flex flex-col h-full rounded-2xl bg-zinc-900/20 border border-white/5 overflow-hidden hover:border-emerald-500/40 hover:shadow-[0_20px_50px_rgba(16,185,129,0.15)] transition-all duration-500"
+                    >
+                      {/* Badge Ribbon */}
+                      <div className="absolute top-4 right-4 z-20">
+                         <div className="bg-emerald-500 text-black text-[8px] font-black px-2 py-0.5 rounded shadow-lg transform rotate-12">VERIFIED</div>
+                      </div>
+
+                      <div className="h-44 w-full relative overflow-hidden bg-zinc-800/10">
+                        {cert.image && (
                           <img 
                             src={cert.image} 
                             alt={cert.title} 
-                            onError={(e) => {
-                              e.target.style.display = 'none'; // Sembunyikan kalau 404
-                              e.target.nextSibling.style.display = 'flex'; // Munculkan fallback icon
-                            }}
-                            className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110"
+                            className="w-full h-full object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" 
                           />
-                        ) : null}
-                        {/* Fallback Icon (Awalnya tersembunyi kalau ada foto, tapi muncul kalau foto 404 atau emang kosong) */}
-                        <div className={`w-full h-full flex items-center justify-center text-zinc-600 bg-zinc-800/20 ${cert.image ? 'hidden' : 'flex'}`}>
-                           <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-                        </div>
-                        <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/80 to-transparent" />
+                        )}
+                        <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-transparent to-transparent" />
                       </div>
 
-                      {/* Content */}
-                      <div className="p-4 flex flex-col flex-grow">
-                        <div className="text-[10px] text-emerald-500 font-bold uppercase tracking-widest mb-1">{cert.issuer}</div>
-                        <h4 className="text-sm font-bold text-zinc-100 group-hover:text-white transition-colors leading-tight mb-4">{cert.title}</h4>
+                      <div className="p-6 flex flex-col flex-grow relative -mt-8 bg-zinc-900/80 backdrop-blur-md rounded-t-3xl">
+                        <div className="text-[10px] text-emerald-500 font-black uppercase tracking-widest mb-2">{cert.issuer}</div>
+                        <h4 className="text-base font-bold text-zinc-100 group-hover:text-white transition-colors leading-tight mb-6">{cert.title}</h4>
                         
-                        <div className="mt-auto flex items-center justify-between">
-                          <span className="text-[10px] text-zinc-600 font-mono italic">{cert.date}</span>
+                        <div className="mt-auto pt-4 border-t border-white/5 flex items-center justify-between">
+                          <span className="text-[11px] text-zinc-600 font-mono">{cert.date}</span>
                           <a 
                             href={cert.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-[11px] text-zinc-400 group-hover:text-emerald-400 transition-colors uppercase font-black tracking-tighter flex items-center gap-1"
+                            className="text-[10px] text-zinc-300 font-bold hover:text-emerald-400 transition-colors flex items-center gap-1 group/btn"
                           >
-                            VERIFY <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                            CREDENTIAL <RiExternalLinkLine className="w-3.5 h-3.5 group-hover/btn:-translate-y-0.5 group-hover/btn:translate-x-0.5 transition-transform" />
                           </a>
                         </div>
                       </div>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               </div>
@@ -417,82 +473,91 @@ function App() {
         </div>
 
         {/* Scroll Velocity Animation - TRULY OUTSIDE ANY CONTAINER - DIRECT UNDER MAIN */}
-        <div className="mt-20 w-full overflow-hidden" data-aos="fade-up">
+        <div className="mt-10 w-full overflow-hidden" data-aos="fade-up">
           <ScrollVelocity />
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Contact Section */}
-          <div className="kontak mt-40 sm:p-10 p-0 relative" id="contact">
-            <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-full h-[500px] bg-emerald-500/5 blur-[120px] rounded-full -z-10" />
+          <div className="kontak mt-16 pb-20 relative" id="contact">
+            {/* Background Glows */}
+            <div className="absolute -top-40 left-0 w-72 h-72 bg-emerald-500/10 blur-[120px] rounded-full -z-10 animate-pulse" />
+            <div className="absolute bottom-0 right-0 w-96 h-96 bg-emerald-500/5 blur-[150px] rounded-full -z-10" />
             
-            <div className="text-center mb-16" data-aos="fade-up">
-              <h2 className="text-4xl md:text-5xl font-extrabold mb-4 tracking-tight">
-                <ShinyText text="Get in Touch" speed={3} />
+            <div className="text-center mb-10" data-aos="fade-up">
+              <h2 className="text-5xl md:text-6xl font-black mb-6 tracking-tight bg-gradient-to-b from-white to-white/40 bg-clip-text text-transparent italic uppercase">
+                Let's Build Something <span className="text-emerald-500 not-italic">Epic</span>.
               </h2>
-              <div className="max-w-2xl mx-auto">
+              <div className="max-w-2xl mx-auto px-4">
                 <BlurText 
-                  text="Join the community chat or drop me a private message below. I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions."
-                  delay={50}
+                  text="Have a concept that needs to come alive? Or maybe you just want to say hi? My inbox is always open. Let's create the future together."
+                  delay={40}
                   animateBy="words"
                   direction="top"
-                  className="text-gray-400 text-lg leading-relaxed"
+                  className="text-zinc-400 text-lg sm:text-xl font-medium leading-relaxed"
                 />
               </div>
             </div>
-            <div className="flex flex-col md:flex-row gap-8">
-              <div className="flex-1" data-aos="fade-up">
-                <ChatRoom />
-              </div>
-              <div className="flex-1" data-aos="fade-up">
-                <div className="bg-zinc-900/50 backdrop-blur-xl p-8 md:p-10 w-full rounded-3xl shadow-2xl border border-white/5 relative overflow-hidden group">
-                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  
-                  <form action="https://formsubmit.co/niifw39@gmail.com" method="POST" className="relative z-10">
-                    <div className="flex flex-col gap-8">
-                      <div className="flex flex-col gap-3">
-                        <label className="font-medium text-sm text-emerald-400 uppercase tracking-widest pl-1">Your Name</label>
-                        <input 
-                          type="text" 
-                          name="Name" 
-                          placeholder="What should I call you?" 
-                          className="bg-zinc-800/50 border border-white/5 p-4 rounded-2xl focus:ring-2 focus:ring-emerald-500/50 outline-none text-white transition-all placeholder:text-zinc-600 hover:border-white/10" 
-                          required
-                        />
+
+            <div className="max-w-4xl mx-auto w-full">
+              <div className="flex flex-col gap-12">
+                {/* Advanced Form */}
+                <div className="" data-aos="fade-up">
+                  <div className="bg-zinc-900/60 backdrop-blur-3xl p-8 md:p-12 w-full rounded-[40px] shadow-2xl border border-emerald-500/10 relative overflow-hidden group">
+                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-emerald-500/30 to-transparent" />
+                    
+                    <form action="https://formsubmit.co/niifw39@gmail.com" method="POST" className="relative z-10 flex flex-col gap-10">
+                      <div className="grid md:grid-cols-2 gap-8">
+                        <div className="flex flex-col gap-4">
+                          <label className="text-[10px] font-black text-emerald-500 uppercase tracking-[0.2em] ml-2">WHO ARE YOU?</label>
+                          <input 
+                            type="text" 
+                            name="Name" 
+                            placeholder="Ex: Haniif Wardana" 
+                            className="bg-black/40 border border-zinc-800 p-5 rounded-2xl focus:ring-4 focus:ring-emerald-500/10 focus:border-emerald-500/50 outline-none text-white transition-all placeholder:text-zinc-700" 
+                            required
+                          />
+                        </div>
+                        <div className="flex flex-col gap-4">
+                          <label className="text-[10px] font-black text-emerald-500 uppercase tracking-[0.2em] ml-2">WHERE TO REPLY?</label>
+                          <input 
+                            type="email" 
+                            name="Email" 
+                            placeholder="Ex: hello@company.com" 
+                            className="bg-black/40 border border-zinc-800 p-5 rounded-2xl focus:ring-4 focus:ring-emerald-500/10 focus:border-emerald-500/50 outline-none text-white transition-all placeholder:text-zinc-700" 
+                            required
+                          />
+                        </div>
                       </div>
-                      <div className="flex flex-col gap-3">
-                        <label className="font-medium text-sm text-emerald-400 uppercase tracking-widest pl-1">Email Address</label>
-                        <input 
-                          type="email" 
-                          name="Email" 
-                          placeholder="Where can I reach you back?" 
-                          className="bg-zinc-800/50 border border-white/5 p-4 rounded-2xl focus:ring-2 focus:ring-emerald-500/50 outline-none text-white transition-all placeholder:text-zinc-600 hover:border-white/10" 
-                          required
-                        />
-                      </div>
-                      <div className="flex flex-col gap-3">
-                        <label className="font-medium text-sm text-emerald-400 uppercase tracking-widest pl-1">Message</label>
+
+                      <div className="flex flex-col gap-4">
+                        <label className="text-[10px] font-black text-emerald-500 uppercase tracking-[0.2em] ml-2">TELL ME EVERYTHING</label>
                         <textarea 
                           name="message" 
-                          rows="5" 
-                          placeholder="How can I help you today?" 
-                          className="bg-zinc-800/50 border border-white/5 p-4 rounded-2xl focus:ring-2 focus:ring-emerald-500/50 outline-none text-white transition-all resize-none placeholder:text-zinc-600 hover:border-white/10" 
+                          rows="6" 
+                          placeholder="I'm looking for a developer who can..." 
+                          className="bg-black/40 border border-zinc-800 p-5 rounded-2xl focus:ring-4 focus:ring-emerald-500/10 focus:border-emerald-500/50 outline-none text-white transition-all resize-none placeholder:text-zinc-700" 
                           required
                         ></textarea>
                       </div>
+
                       <button 
                         type="submit" 
-                        className="group/btn relative font-bold bg-emerald-600 p-4 rounded-2xl w-full overflow-hidden transition-all duration-300 hover:bg-emerald-500 hover:shadow-[0_0_30px_rgba(16,185,129,0.4)] text-white"
+                        className="group/btn relative font-black text-xs sm:text-sm uppercase tracking-widest bg-emerald-500 p-4 md:p-6 rounded-2xl w-full overflow-hidden transition-all duration-500 hover:shadow-[0_15px_40px_rgba(16,185,129,0.3)] text-black flex items-center justify-center gap-4"
                       >
-                        <span className="relative z-10 flex items-center justify-center gap-2">
-                          Send Message
-                          <svg className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                          </svg>
-                        </span>
+                        <span className="absolute inset-0 bg-white opacity-0 group-hover/btn:opacity-20 transition-opacity" />
+                        SEND TRANSMISSION
+                        <div className="w-6 md:w-8 h-6 md:h-8 rounded-full bg-black/10 flex items-center justify-center group-hover/btn:translate-x-2 transition-transform">
+                          <RiMailSendLine className="w-3 md:w-4 h-3 md:h-4" />
+                        </div>
                       </button>
-                    </div>
-                  </form>
+                    </form>
+                  </div>
+                </div>
+
+                {/* Integrated ChatRoom below the form for a cleaner look */}
+                <div className="w-full" data-aos="fade-up">
+                  <ChatRoom />
                 </div>
               </div>
             </div>

@@ -101,11 +101,20 @@ export const ChromaGrid = ({
           }
         >
           <div className="chroma-img-wrapper">
-            {c.image ? (
+            {c.video ? (
+              <video 
+                src={c.video} 
+                autoPlay 
+                muted 
+                loop 
+                playsInline
+                className="w-full h-full object-cover"
+              />
+            ) : c.image ? (
               <img src={c.image} alt={c.title} loading="lazy" />
             ) : (
               <div className="w-full h-full bg-zinc-800 flex items-center justify-center text-zinc-600">
-                No Image
+                No Preview
               </div>
             )}
           </div>

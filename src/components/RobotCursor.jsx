@@ -24,7 +24,7 @@ const RobotCursor = () => {
 
   return (
     <div className="w-full h-full flex items-center justify-center pointer-events-none" ref={containerRef}>
-        <div className="absolute top-0 h-full w-[150%] left-[-55%]">
+        <div className="absolute top-0 h-full w-[170%] md:w-[150%] left-1/2 -translate-x-[45%] md:left-[-55%] md:translate-x-0">
           <Spline 
             scene="https://prod.spline.design/4H8QVfoPEgyizYn3/scene.splinecode"
             className="w-full h-full"

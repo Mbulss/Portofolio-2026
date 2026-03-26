@@ -1,83 +1,120 @@
 import React, { useState, useEffect } from 'react';
-import { FiX, FiExternalLink } from 'react-icons/fi'; // Install react-icons jika belum: npm install react-icons
+import { FiX, FiExternalLink, FiGithub, FiPlayCircle } from 'react-icons/fi';
 
 const ProjectModal = ({ isOpen, onClose, project }) => {
-  // State untuk mengontrol animasi penutupan
   const [isClosing, setIsClosing] = useState(false);
 
-  // Fungsi untuk menangani penutupan dengan animasi
   const handleClose = () => {
     setIsClosing(true);
-    // Tunggu animasi selesai (300ms) sebelum memanggil onClose dari props
     setTimeout(() => {
       onClose();
-      setIsClosing(false); // Reset state untuk pembukaan berikutnya
+      setIsClosing(false);
     }, 300);
   };
 
-  // Mencegah scroll di background saat modal terbuka
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'auto';
     }
-    // Cleanup function
     return () => {
       document.body.style.overflow = 'auto';
     };
   }, [isOpen]);
 
-
   if (!isOpen) return null;
 
   return (
-    // Overlay
     <div
       onClick={handleClose}
-      className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 p-4 transition-opacity duration-300"
+      className="fixed inset-0 bg-black/95 backdrop-blur-sm flex justify-center items-center z-[100000] p-4 sm:p-6 transition-all duration-300"
     >
-      {/* Modal Content */}
       <div
-        onClick={(e) => e.stopPropagation()} // Mencegah modal tertutup saat diklik di dalam
-        className={`bg-zinc-900 border border-emerald-500/30 rounded-2xl shadow-2xl shadow-emerald-500/10 w-full max-w-lg transform transition-transform duration-300 ${isClosing ? 'animate-out' : 'animate-in'}`}
+        onClick={(e) => e.stopPropagation()}
+        className={`bg-zinc-950 border border-white/10 rounded-3xl shadow-2xl shadow-emerald-500/10 w-full max-w-[440px] max-h-[90vh] flex flex-col overflow-hidden transform transition-all duration-300 ${isClosing ? 'animate-out' : 'animate-in'}`}
       >
-        {/* --- GAMBAR PROYEK --- */}
-        <img 
-          src={project.image} 
-          alt={project.title} 
-          className="w-full h-56 object-cover rounded-t-2xl"
-        />
+        {/* --- HEADER MEDIA --- */}
+        <div className="relative w-full aspect-video flex-shrink-0 bg-zinc-900 overflow-hidden border-b border-white/5">
+          {project.video ? (
+            <video 
+              src={project.video} 
+              autoPlay 
+              muted 
+              loop 
+              controls
+              playsInline 
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <img 
+              src={project.image} 
+              alt={project.title} 
+              className="w-full h-full object-cover"
+            />
+          )}
+          
+          <button
+            onClick={handleClose}
+            className="absolute top-4 right-4 bg-black/60 backdrop-blur-xl text-white p-2 rounded-full hover:bg-emerald-500 transition-all z-20 border border-white/10 shadow-lg"
+          >
+            <FiX size={18} />
+          </button>
+        </div>
 
-        <div className="p-6 flex flex-col gap-4">
-            <div className="flex justify-between items-start">
-                <h2 className="text-2xl font-bold text-white">{project.title}</h2>
-                <button
-                    onClick={handleClose}
-                    className="text-zinc-400 hover:text-white transition-colors p-2 rounded-full hover:bg-zinc-700 -mt-2 -mr-2"
-                >
-                    <FiX size={24} />
-                </button>
-            </div>
+        {/* --- CONTENT --- */}
+        <div className="p-6 sm:p-5 flex-grow overflow-y-auto project-modal-scroll">
+          <div className="flex flex-col gap-4">
+            <h2 className="text-[1.5rem] sm:text-[1.1rem] font-bold text-white leading-tight">
+              {project.title}
+            </h2>
 
-            {/* --- DESKRIPSI LENGKAP --- */}
-            <p className="text-zinc-300 text-base leading-relaxed">
-                {project.fullDescription}
+            <p className="text-zinc-400 text-[14px] sm:text-[12px] leading-relaxed font-normal">
+              {project.fullDescription}
             </p>
 
-            <a
+            <div className="flex flex-col gap-3 mt-4 pt-6 border-t border-white/5 sm:border-t-0 sm:pt-0 sm:flex-row sm:gap-2">
+              <a
                 href={project.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-4 inline-flex items-center justify-center gap-2 font-semibold bg-emerald-600 p-3 px-5 rounded-full w-full cursor-pointer border border-transparent hover:bg-emerald-500 hover:shadow-[0_0_20px_rgba(16,185,129,0.4)] transition-all duration-300 text-white"
-            >
-                <FiExternalLink size={20} />
-                <span>Live Preview</span>
-            </a>
+                className="flex-1 inline-flex items-center justify-center gap-2 font-bold bg-emerald-500 text-black py-4 sm:py-2 rounded-xl sm:rounded-lg hover:bg-emerald-400 transition-all duration-300 text-base sm:text-[11px]"
+              >
+                <FiExternalLink size={18} className="sm:size-[13px]" />
+                <span>Live Demo</span>
+              </a>
+              
+              {project.githubUrl && (
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 inline-flex items-center justify-center gap-2 font-bold bg-zinc-900 text-white py-4 sm:py-2 rounded-xl sm:rounded-lg border border-white/10 hover:bg-zinc-800 transition-all duration-300 text-base sm:text-[11px]"
+                >
+                  <FiGithub size={18} className="sm:size-[13px]" />
+                  <span>Code</span>
+                </a>
+              )}
+            </div>
+          </div>
         </div>
       </div>
-       {/* CSS untuk animasi */}
+       {/* UI Customizations */}
       <style>{`
+        .project-modal-scroll {
+           scrollbar-width: thin;
+           scrollbar-color: rgba(16, 185, 129, 0.3) transparent;
+        }
+        .project-modal-scroll::-webkit-scrollbar {
+          width: 4px;
+        }
+        .project-modal-scroll::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        .project-modal-scroll::-webkit-scrollbar-thumb {
+          background: rgba(16,185,129,0.3);
+          border-radius: 99px;
+        }
         @keyframes scaleIn {
           from { transform: scale(0.95); opacity: 0; }
           to { transform: scale(1); opacity: 1; }

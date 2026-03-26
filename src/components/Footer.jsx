@@ -13,14 +13,15 @@ const Footer = () => {
   return (
     <div className="mt-32 pb-8 flex flex-col items-center relative z-10 w-full overflow-hidden">
       {/* Massive Name Display with Robot Full Width */}
-      <div className="relative w-full flex justify-end items-center py-20 min-h-[40vh] px-[10vw]">
-        <h1 className="text-[15vw] md:text-[20vw] font-black leading-none tracking-tighter text-white opacity-95 select-none text-center z-10">
-          HANIIF
-        </h1>
-        {/* Full width robot container restored to avoid clipping and keep Spline logo in corner */}
-        <div className="absolute inset-0 w-full h-full pointer-events-none z-20">
+      <div className="relative w-full flex flex-col md:flex-row justify-center md:justify-end items-center py-10 md:py-20 min-h-[40vh] px-[5vw] md:px-[10vw] gap-0 md:gap-0">
+        {/* Mobile Robot Container (Top) */}
+        <div className="relative md:absolute md:inset-0 w-full h-[30vh] md:h-full pointer-events-none z-20">
           <RobotCursor />
         </div>
+        
+        <h1 className="text-[15vw] md:text-[20vw] font-black leading-none tracking-tighter text-white opacity-95 select-none text-center z-10 translate-y-[-2vh] md:translate-y-0">
+          HANIIF
+        </h1>
       </div>
 
       {/* Grid container for other footer info */}

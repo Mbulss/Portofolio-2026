@@ -62,7 +62,7 @@ const CursorFollower = () => {
 
       {/* Main Dot */}
       <motion.div
-        className="custom-cursor fixed top-0 left-0 w-2 h-2 bg-emerald-400 rounded-full pointer-events-none z-[9999]"
+        className="custom-cursor fixed top-0 left-0 w-2 h-2 bg-emerald-400 rounded-full pointer-events-none z-[999999]"
         style={{
           x: mouseX,
           y: mouseY,
@@ -73,7 +73,7 @@ const CursorFollower = () => {
 
       {/* Trailing Ring */}
       <motion.div
-        className="custom-cursor fixed top-0 left-0 border border-emerald-400/50 rounded-full pointer-events-none z-[9998]"
+        className="custom-cursor fixed top-0 left-0 border border-emerald-400/50 rounded-full pointer-events-none z-[999998]"
         animate={{
           width: isHovering ? 60 : 32,
           height: isHovering ? 60 : 32,

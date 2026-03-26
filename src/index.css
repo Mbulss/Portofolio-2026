@@ -1,13 +1,27 @@
 @import "tailwindcss";
 
 @layer base {
-  html, body {
+  html {
+    overflow: initial !important; /* Reset any forced scroll */
+  }
+
+  body {
     font-family: "Poppins", sans-serif;
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+    overflow-y: auto;
     position: relative;
     width: 100%;
+    min-height: 100vh;
+    background-color: #050505;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #root {
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
   }
 }
 
