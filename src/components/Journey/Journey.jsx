@@ -39,7 +39,7 @@ const JourneyItem = ({ item, index }) => {
         >
           {/* Animated Ring */}
           <motion.div 
-            className="absolute inset-[-6px] border border-emerald-500/30 rounded-full"
+            className="absolute inset-[-6px] border border-emerald-500/30 rounded-full z-10"
             animate={{ rotate: 360 }}
             transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
           />
@@ -57,9 +57,16 @@ const JourneyItem = ({ item, index }) => {
       >
         <div className="journey-card-glow text-left"></div>
         <div className="journey-card-inner text-left">
-          <div className="journey-card-header">
-            <span className="journey-date font-mono text-[10px] sm:text-xs opacity-60 uppercase tracking-tighter">{item.date}</span>
-            <span className="journey-category text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-emerald-400 bg-emerald-400/10 px-2 py-1 rounded-md">{item.category}</span>
+          <div className="journey-card-header flex justify-between items-start mb-4">
+             <div className="flex flex-col gap-1">
+                <span className="journey-date font-mono text-[10px] sm:text-xs opacity-60 uppercase tracking-tighter">{item.date}</span>
+                <span className="journey-category text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-emerald-400 bg-emerald-400/10 px-2 py-1 rounded-md inline-block w-fit">{item.category}</span>
+             </div>
+             {item.logo && (
+               <div className="w-10 h-10 bg-white p-1.5 rounded-xl shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+                 <img src={item.logo} alt="Logo" className="w-full h-full object-contain" />
+               </div>
+             )}
           </div>
           <h3 className="journey-title text-xl sm:text-2xl font-black mb-2 group-hover:text-emerald-400 transition-colors uppercase leading-tight">{item.title}</h3>
           <p className="journey-location text-emerald-500/80 font-bold mb-4 text-xs sm:text-sm italic">{item.location}</p>

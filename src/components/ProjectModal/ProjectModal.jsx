@@ -44,6 +44,7 @@ const ProjectModal = ({ isOpen, onClose, project }) => {
               loop 
               controls
               playsInline 
+              preload="auto"
               className="w-full h-full object-cover"
             />
           ) : (

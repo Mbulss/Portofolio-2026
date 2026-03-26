@@ -108,6 +108,7 @@ export const ChromaGrid = ({
                 muted 
                 loop 
                 playsInline
+                preload="metadata"
                 className="w-full h-full object-cover"
               />
             ) : c.image ? (
