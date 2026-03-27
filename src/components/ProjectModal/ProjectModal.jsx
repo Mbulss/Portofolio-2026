@@ -1,15 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { FiX, FiExternalLink, FiGithub, FiPlayCircle } from 'react-icons/fi';
+import { FiX, FiExternalLink, FiGithub, FiPlayCircle, FiFileText, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const ProjectModal = ({ isOpen, onClose, project }) => {
   const [isClosing, setIsClosing] = useState(false);
+  const [currentImgIndex, setCurrentImgIndex] = useState(0);
 
   const handleClose = () => {
     setIsClosing(true);
     setTimeout(() => {
       onClose();
       setIsClosing(false);
+      setCurrentImgIndex(0);
     }, 300);
+  };
+
+  const nextImg = (e) => {
+    e.stopPropagation();
+    if (project.images) {
+      setCurrentImgIndex((prev) => (prev + 1) % project.images.length);
+    }
+  };
+
+  const prevImg = (e) => {
+    e.stopPropagation();
+    if (project.images) {
+      setCurrentImgIndex((prev) => (prev - 1 + project.images.length) % project.images.length);
+    }
   };
 
   useEffect(() => {
@@ -34,8 +51,8 @@ const ProjectModal = ({ isOpen, onClose, project }) => {
         onClick={(e) => e.stopPropagation()}
         className={`bg-zinc-950 border border-white/10 rounded-3xl shadow-2xl shadow-emerald-500/10 w-full max-w-[440px] max-h-[90vh] flex flex-col overflow-hidden transform transition-all duration-300 ${isClosing ? 'animate-out' : 'animate-in'}`}
       >
-        {/* --- HEADER MEDIA --- */}
-        <div className="relative w-full aspect-video flex-shrink-0 bg-zinc-900 overflow-hidden border-b border-white/5">
+        {/* --- HEADER MEDIA (Gallery / Video / Single) --- */}
+        <div className="relative w-full aspect-video flex-shrink-0 bg-zinc-900 overflow-hidden border-b border-white/5 group">
           {project.video ? (
             <video 
               src={project.video} 
@@ -47,6 +64,52 @@ const ProjectModal = ({ isOpen, onClose, project }) => {
               preload="auto"
               className="w-full h-full object-cover"
             />
+          ) : project.images && project.images.length > 0 ? (
+            <div className="relative w-full h-full">
+              <AnimatePresence mode="wait">
+                <motion.img
+                  key={currentImgIndex}
+                  src={project.images[currentImgIndex]}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.3 }}
+                  className="w-full h-full object-contain bg-black"
+                />
+              </AnimatePresence>
+              
+              {/* Carousel Controls */}
+              {project.images.length > 1 && (
+                <>
+                  <button 
+                    onClick={prevImg}
+                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-emerald-500 text-white p-1.5 rounded-full backdrop-blur-md transition-all opacity-0 group-hover:opacity-100 hidden sm:block z-10"
+                  >
+                    <FiChevronLeft size={20} />
+                  </button>
+                  <button 
+                    onClick={nextImg}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-emerald-500 text-white p-1.5 rounded-full backdrop-blur-md transition-all opacity-0 group-hover:opacity-100 hidden sm:block z-10"
+                  >
+                    <FiChevronRight size={20} />
+                  </button>
+                  
+                  {/* Indicators / Dots */}
+                  <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+                    {project.images.map((_, i) => (
+                      <button
+                        key={i}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setCurrentImgIndex(i);
+                        }}
+                        className={`h-1 rounded-full transition-all duration-300 ${i === currentImgIndex ? 'w-4 bg-emerald-500' : 'w-1.5 bg-white/30'}`}
+                      />
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
           ) : (
             <img 
               src={project.image} 
@@ -74,28 +137,44 @@ const ProjectModal = ({ isOpen, onClose, project }) => {
               {project.fullDescription}
             </p>
 
-            <div className="flex flex-col gap-3 mt-4 pt-6 border-t border-white/5 sm:border-t-0 sm:pt-0 sm:flex-row sm:gap-2">
-              <a
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1 inline-flex items-center justify-center gap-2 font-bold bg-emerald-500 text-black py-4 sm:py-2 rounded-xl sm:rounded-lg hover:bg-emerald-400 transition-all duration-300 text-base sm:text-[11px]"
-              >
-                <FiExternalLink size={18} className="sm:size-[13px]" />
-                <span>Live Demo</span>
-              </a>
-              
-              {project.githubUrl && (
+            <div className="flex flex-col gap-2 mt-4 pt-4 border-t border-white/5 sm:border-t-0 sm:pt-0 sm:flex-row">
+              {project.url && (
                 <a
-                  href={project.githubUrl}
+                  href={project.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 inline-flex items-center justify-center gap-2 font-bold bg-zinc-900 text-white py-4 sm:py-2 rounded-xl sm:rounded-lg border border-white/10 hover:bg-zinc-800 transition-all duration-300 text-base sm:text-[11px]"
+                  className="flex-[1.5] inline-flex items-center justify-center gap-2 font-bold bg-emerald-500 text-black py-3 sm:py-2 rounded-xl sm:rounded-lg hover:bg-emerald-400 transition-all duration-300 text-sm sm:text-[11px]"
                 >
-                  <FiGithub size={18} className="sm:size-[13px]" />
-                  <span>Code</span>
+                  <FiExternalLink size={16} className="sm:size-[12px]" />
+                  <span className="whitespace-nowrap italic">Live Demo</span>
                 </a>
               )}
+              
+              <div className="flex flex-row gap-2 flex-grow">
+                {project.githubUrl && (
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`flex-1 inline-flex items-center justify-center gap-2 font-bold bg-zinc-900 text-white py-3 sm:py-2 rounded-xl sm:rounded-lg border border-white/10 hover:bg-zinc-800 transition-all duration-300 text-sm sm:text-[11px] ${!project.url ? 'flex-[2]' : ''}`}
+                  >
+                    <FiGithub size={16} className="sm:size-[12px]" />
+                    <span className="whitespace-nowrap">Code</span>
+                  </a>
+                )}
+
+                {project.paperUrl && (
+                  <a
+                    href={project.paperUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 inline-flex items-center justify-center gap-2 font-bold bg-white/5 text-zinc-300 py-3 sm:py-2 rounded-xl sm:rounded-lg border border-white/10 hover:bg-white/10 transition-all duration-300 text-sm sm:text-[11px]"
+                  >
+                    <FiFileText size={16} className="sm:size-[12px]" />
+                    <span className="whitespace-nowrap">Paper</span>
+                  </a>
+                )}
+              </div>
             </div>
           </div>
         </div>

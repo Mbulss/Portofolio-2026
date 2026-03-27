@@ -1,6 +1,63 @@
-import { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { gsap } from "gsap";
 import "./ChromaGrid.css";
+
+// Sub-komponen untuk preview proyek yang "gerak-gerak" (slideshow cepat)
+const ProjectPreview = ({ c }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    if (c.images && c.images.length > 1) {
+      const interval = setInterval(() => {
+        setCurrentIndex((prev) => (prev + 1) % c.images.length);
+      }, 3000); // 3s interval for a much calmer pacing
+      return () => clearInterval(interval);
+    }
+  }, [c.images]);
+
+  if (c.video) {
+    return (
+      <video 
+        src={c.video} 
+        autoPlay 
+        muted 
+        loop 
+        playsInline
+        preload="metadata"
+        className="w-full h-full object-cover"
+      />
+    );
+  }
+
+  if (c.images && c.images.length > 0) {
+    return (
+      <div className="relative w-full h-full bg-black overflow-hidden">
+        <AnimatePresence>
+          <motion.img
+            key={currentIndex}
+            src={c.images[currentIndex]}
+            alt={c.title}
+            initial={{ opacity: 0, scale: 1.05 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.2, ease: "easeInOut" }}
+            className="absolute inset-0 w-full h-full object-contain" 
+          />
+        </AnimatePresence>
+      </div>
+    );
+  }
+
+  return (
+    <img 
+      src={c.image} 
+      alt={c.title} 
+      loading="lazy" 
+      className="w-full h-full object-cover" 
+    />
+  );
+};
 
 // Terima `onItemClick` di props
 export const ChromaGrid = ({
@@ -100,25 +157,9 @@ export const ChromaGrid = ({
             }
           }
         >
-          <div className="chroma-img-wrapper">
-            {c.video ? (
-              <video 
-                src={c.video} 
-                autoPlay 
-                muted 
-                loop 
-                playsInline
-                preload="metadata"
-                className="w-full h-full object-cover"
-              />
-            ) : c.image ? (
-              <img src={c.image} alt={c.title} loading="lazy" />
-            ) : (
-              <div className="w-full h-full bg-zinc-800 flex items-center justify-center text-zinc-600">
-                No Preview
-              </div>
-            )}
-          </div>
+            <div className="chroma-img-wrapper">
+               <ProjectPreview c={c} />
+            </div>
           <footer className="chroma-info">
             <h3 className="name">{c.title}</h3>
             {c.handle && <span className="handle">{c.handle}</span>}

@@ -152,8 +152,12 @@ function App() {
           </div>
 
           {/* About Section */}
-          <div className="mt-32 mx-auto w-full max-w-[1600px] rounded-3xl border-[5px] border-emerald-500/20 shadow-[0_0_30px_rgba(16,185,129,0.2)] bg-gradient-to-br from-[#0a0a0a] via-[#111111] to-[#1a1a1a] p-4 sm:p-10" id="about">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-10 pt-0 px-2 sm:px-8" data-aos="fade-up">
+          <div className="mt-32 mx-auto w-full max-w-[1600px] rounded-[32px] border border-white/5 bg-zinc-900/40 backdrop-blur-2xl shadow-2xl p-4 sm:p-12 relative overflow-hidden group hover:border-emerald-500/20 transition-all duration-700" id="about">
+            {/* Background Glows for large card */}
+            <div className="absolute -top-24 -right-24 w-64 h-64 bg-emerald-500/5 blur-[100px] rounded-full group-hover:bg-emerald-500/10 transition-colors" />
+            <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-emerald-500/5 blur-[100px] rounded-full" />
+            
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-12 pt-0 px-2 sm:px-8 relative z-10" data-aos="fade-up">
               <div className="basis-full md:basis-5/12 pr-0 md:pr-8 border-none md:border-b-0 md:border-r md:border-emerald-500/20 overflow-visible max-w-full flex justify-center py-0 sm:py-0 min-h-[400px] md:min-h-0">
                 {isMobile ? (
                   <Card3DViewer />
@@ -301,18 +305,23 @@ function App() {
                             }
                           }}
                           exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.1 } }}
-                          className="flex items-center gap-4 p-4 border border-zinc-700 rounded-xl bg-zinc-900/60 backdrop-blur-md hover:bg-zinc-800/80 transition-all duration-300 group shadow-lg"
+                          className="flex items-center gap-5 p-5 border border-white/5 rounded-[24px] bg-zinc-900/40 backdrop-blur-xl hover:bg-zinc-800/60 transition-all duration-500 group shadow-2xl relative overflow-hidden"
                         >
-                          <img
-                            src={tool.gambar}
-                            alt={tool.nama}
-                            className="w-10 h-10 object-contain bg-zinc-800 p-2 rounded-lg group-hover:bg-zinc-900 transition-all duration-300"
-                          />
-                          <div className="flex flex-col overflow-hidden">
+                          {/* Hover Glow */}
+                          <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                          
+                          <div className="relative z-10 w-12 h-12 bg-zinc-950/50 p-2.5 rounded-2xl border border-white/5 group-hover:border-emerald-500/30 transition-all duration-500 flex items-center justify-center">
+                            <img
+                              src={tool.gambar}
+                              alt={tool.nama}
+                              className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500"
+                            />
+                          </div>
+                          <div className="relative z-10 flex flex-col overflow-hidden">
                             <div className="truncate">
-                              <ShinyText text={tool.nama} speed={3} className="text-lg font-semibold block" />
+                              <ShinyText text={tool.nama} speed={3} className="text-lg font-bold block" />
                             </div>
-                            <p className="text-sm text-zinc-400 truncate">{tool.ket}</p>
+                            <p className="text-xs text-zinc-500 group-hover:text-zinc-400 transition-colors uppercase tracking-widest font-black leading-tight">{tool.ket}</p>
                           </div>
                         </motion.div>
                       ))}
@@ -372,7 +381,7 @@ function App() {
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ delay: idx * 0.1 }}
                       viewport={{ once: true }}
-                      className="p-8 rounded-3xl bg-zinc-900/40 backdrop-blur-xl border border-white/5 hover:border-emerald-500/30 transition-all duration-500 group relative overflow-hidden"
+                      className="p-8 rounded-[24px] bg-zinc-900/40 backdrop-blur-xl border border-white/5 hover:border-emerald-500/30 transition-all duration-500 group relative overflow-hidden shadow-2xl"
                     >
                       <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 blur-3xl -z-10 group-hover:bg-emerald-500/10 transition-colors" />
                       <div className="flex justify-between items-start mb-6">
@@ -381,8 +390,8 @@ function App() {
                         </span>
                         <span className="text-sm text-zinc-600 font-mono font-bold tracking-tighter">{pub.date}</span>
                       </div>
-                      <h4 className="text-2xl font-black text-white mb-4 group-hover:text-emerald-400 transition-colors leading-tight uppercase">{pub.title}</h4>
-                      <p className="text-zinc-500 text-sm leading-relaxed mb-8 font-medium line-clamp-3 italic">"{pub.description}"</p>
+                      <h4 className="text-2xl font-black text-white mb-4 group-hover:text-emerald-400 transition-colors leading-tight uppercase line-clamp-2">{pub.title}</h4>
+                      <p className="text-zinc-500 text-sm leading-relaxed mb-8 font-medium italic line-clamp-2">"{pub.description}"</p>
                       <a 
                         href={pub.url} 
                         target="_blank" 
