@@ -21,7 +21,22 @@ const analytics = getAnalytics(app);
 // Auth
 export const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
-export const loginWithGoogle = () => signInWithPopup(auth, provider);
+
+export const loginWithGoogle = async () => {
+  try {
+    const result = await signInWithPopup(auth, provider);
+    return result.user;
+  } catch (error) {
+    console.error("Firebase Login Error:", error.code, error.message);
+    if (error.code === 'auth/unauthorized-domain') {
+      alert("Oops! Domain ini belum diizinkan di Firebase Console. \n\nCara Fix:\n1. Buka Firebase Console\n2. Authentication > Settings > Authorized Domains\n3. Tambahkan domain Vercel Anda di sana.");
+    } else {
+      alert("Login gagal: " + error.message);
+    }
+    throw error;
+  }
+};
+
 export const logout = () => signOut(auth);
 
 // Firestore
