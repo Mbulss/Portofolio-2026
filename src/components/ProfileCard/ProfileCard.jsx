@@ -295,14 +295,14 @@ const ProfileCardComponent = ({
         <div className="pc-inside">
           <div className="pc-shine" />
           <div className="pc-glare" />
-          <div className="pc-content" style={{ zIndex: 11 }}>
+          <div className="pc-content" style={{ zIndex: 10 }}>
             <div className="pc-details">
               <h3>{name}</h3>
               <p>{title}</p>
             </div>
           </div>
 
-          <div className="pc-content pc-avatar-content" style={{ zIndex: 10 }}>
+          <div className="pc-content pc-avatar-content" style={{ zIndex: 11 }}>
             <img
               className="avatar"
               src={avatarUrl}

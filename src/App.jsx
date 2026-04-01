@@ -145,7 +145,7 @@ function App() {
                   showUserInfo={true}
                   enableTilt={true}
                   enableMobileTilt={false}
-                  onContactClick={() => console.log('Contact clicked')}
+                  onContactClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
                 />
               </div>
             </div>
