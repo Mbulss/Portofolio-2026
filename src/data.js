@@ -96,15 +96,22 @@ export const listProyek = [
   },
   {
     id: 2,
-    image: "/assets/projects/hishiro.jpg", 
+    image: "/assets/projects/hishiro/1.png", 
     video: "", 
     title: "Hishiro Ticketing System",
     subtitle: "Full-stack ticketing system with AI chatbot",
     fullDescription: "A high-performance enterprise support platform. Features a powerful centralized administrative dashboard, real-time customer engagement through live chat, and an intelligent AI assistant designed to resolve inquiries instantly.",
     borderColor: "#10B981",
     gradient: "linear-gradient(180deg, #10B981, #000)",
-    url: "https://hishiro-ticketing.onrender.com",
-    githubUrl: "https://github.com/CXZJ/hishiro-ticketing-system.git",
+    url: "https://hishiro-ticketing-system.up.railway.app/",
+    githubUrl: "https://github.com/Mbulss/Hishiro-Ticketing-System.git",
+    images: [
+      "/assets/projects/hishiro/1.png",
+      "/assets/projects/hishiro/2.png",
+      "/assets/projects/hishiro/3.png",
+      "/assets/projects/hishiro/4.jpg",
+      "/assets/projects/hishiro/5.png"
+    ],
     dad: "200",
   },
   {

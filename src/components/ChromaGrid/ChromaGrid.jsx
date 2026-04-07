@@ -160,11 +160,54 @@ export const ChromaGrid = ({
             <div className="chroma-img-wrapper">
                <ProjectPreview c={c} />
             </div>
-          <footer className="chroma-info">
-            <h3 className="name">{c.title}</h3>
-            {c.handle && <span className="handle">{c.handle}</span>}
-            <p className="role">{c.subtitle}</p>
-            {c.location && <span className="location">{c.location}</span>}
+          <footer className="chroma-info flex flex-col h-full">
+            <div className="flex flex-col">
+              {/* Fixed height title wrapper so 1-line and 2-line titles take the same space */}
+              <div className="h-[60px] flex items-start">
+                <h3 className="name line-clamp-2">{c.title}</h3>
+              </div>
+              
+              {c.handle && <span className="handle">{c.handle}</span>}
+              
+              {/* Fixed height sub-title wrapper so it's uniform (fits up to 2 lines) */}
+              <div className="h-[44px] mt-1 mb-2">
+                <p className="role text-emerald-400/80 font-medium line-clamp-2">{c.subtitle}</p>
+              </div>
+
+              {c.location && <span className="location">{c.location}</span>}
+              
+              {/* Fixed height description wrapper so it's exactly 4 lines tall always */}
+              <div className="h-[84px] mb-4">
+                <p className="full-desc text-zinc-400 text-[13px] leading-relaxed line-clamp-4">
+                  {c.fullDescription}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex gap-3 pt-4 border-t border-white/5">
+              {c.url && (
+                <a 
+                  href={c.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="flex-1 flex justify-center items-center bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500 hover:text-black border border-emerald-500/20 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-300 group/btn"
+                >
+                  Live Demo
+                </a>
+              )}
+              {c.githubUrl && (
+                <a 
+                  href={c.githubUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="flex-1 flex justify-center items-center bg-zinc-800/50 hover:bg-zinc-700 text-white border border-white/5 hover:border-white/20 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-300"
+                >
+                  GitHub
+                </a>
+              )}
+            </div>
           </footer>
         </article>
       ))}
