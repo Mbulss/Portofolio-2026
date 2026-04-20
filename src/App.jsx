@@ -14,10 +14,12 @@ import Footer from "./components/Footer";
 import ScrollVelocity from "./components/ScrollVelocity/ScrollVelocity";
 import Journey from "./components/Journey/Journey";
 import Card3DViewer from "./components/Card3DViewer/Card3DViewer";
-import AOS from 'aos';
-import 'aos/dist/aos.css';
 import { motion, AnimatePresence } from "framer-motion";
 import { RiGraduationCapFill, RiVerifiedBadgeFill, RiArrowRightLine, RiExternalLinkLine, RiMailSendLine, RiMapPinLine } from "react-icons/ri";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 function App() {
   const aboutRef = useRef(null);
@@ -25,6 +27,7 @@ function App() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [searchSource, setSearchSource] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [isToolsExpanded, setIsToolsExpanded] = useState(false);
 
   const handleProjectClick = (project) => {
     setSelectedProject(project);
@@ -51,15 +54,49 @@ function App() {
       observer.observe(aboutRef.current);
     }
 
-    AOS.init({
-      duration: 600, // Faster animations for better feel
-      once: true,
-      easing: 'ease-out',
-      offset: 50, // Trigger earlier
-      delay: 0,
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    let ctx = gsap.context(() => {
+      // Hero Entrance Animation
+      const heroTl = gsap.timeline();
+      heroTl.from(".hero-content > *", {
+        y: 40,
+        autoAlpha: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power3.out",
+        delay: 0.3
+      })
+      .from(".hero-profile", {
+        scale: 0.9,
+        autoAlpha: 0,
+        duration: 1,
+        ease: "back.out(1.7)"
+      }, "-=0.5");
+
+      // Scroll Reveals
+      const revealElements = gsap.utils.toArray('[data-gsap="reveal"]');
+      revealElements.forEach((el) => {
+        gsap.from(el, {
+          scrollTrigger: {
+            trigger: el,
+            start: "top 95%", // More lenient start
+            toggleActions: "play none none none"
+          },
+          y: 20,
+          autoAlpha: 0,
+          duration: 0.6,
+          ease: "power2.out"
+        });
+      });
+
     });
 
-    return () => observer.disconnect();
+    ScrollTrigger.refresh();
+
+    return () => ctx.revert();
   }, []);
 
   const [isMobile, setIsMobile] = useState(false);
@@ -76,7 +113,7 @@ function App() {
       <CursorFollower />
       <div className="fixed top-0 left-0 w-full h-full -z-10 ">
         <Aurora
-          colorStops={["#577870", "#1F97A6", "#127B99"]}
+          colorStops={["#A2CFFE", "#B2FFFF", "#89CFF0"]}
           blend={0.5}
           amplitude={1.0}
           speed={0.5}
@@ -87,13 +124,13 @@ function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="hero grid md:grid-cols-2 flex-col items-center pt-24 gap-8 md:gap-16">
             {/* Left Col (Desktop) / Main Container (Mobile) */}
-            <div className="flex flex-col items-center md:items-start text-center md:text-left animate__animated animate__fadeInUp animate__delay-3s order-1">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
-                <ShinyText text="Hi I'm Haniif Satria Wardana" disabled={false} speed={3} className='custom-class' />
+            <div className="hero-content flex flex-col items-center md:items-start text-center md:text-left order-1">
+              <h1 className="text-3xl md:text-5xl font-black mb-6 tracking-tight bg-gradient-to-b from-white to-white/40 bg-clip-text text-transparent uppercase">
+                Hi I'm Haniif Satria Wardana
               </h1>
               
-              <div className="md:hidden w-full flex justify-center mb-8 animate__animated animate__zoomIn animate__delay-1s">
-                <div className="relative w-fit">
+              <div className="md:hidden w-full flex justify-center mb-8">
+                <div className="relative w-fit hero-profile">
                   <ProfileCard
                     name="Haniif Satria W"
                     title="Full Stack Developer / AI Enthusiast"
@@ -121,20 +158,20 @@ function App() {
                 <a 
                   href="/assets/CV.pdf" 
                   download="Haniif_Satria_Wardana_CV.pdf" 
-                  className="w-full sm:w-auto text-center font-semibold bg-[#1a1a1a] p-4 px-8 rounded-full border border-gray-700 hover:bg-[#222] hover:border-emerald-400 hover:shadow-[0_0_20px_rgba(52,211,153,0.3)] transition-all duration-300"
+                  className="w-full sm:w-auto text-center font-semibold bg-[#1a1a1a] p-4 px-8 rounded-full border border-gray-700 hover:bg-[#222] hover:border-sky-400 hover:shadow-[0_0_20px_rgba(137,207,240,0.3)] transition-all duration-300"
                 >
                   <ShinyText text="Download CV" disabled={false} speed={3} className="custom-class" />
                 </a>
 
-                <a href="#project" className="w-full sm:w-auto text-center font-semibold bg-[#1a1a1a] p-4 px-8 rounded-full border border-gray-700 hover:bg-[#222] hover:border-emerald-400 hover:shadow-[0_0_20px_rgba(52,211,153,0.3)] transition-all duration-300">
+                <a href="#project" className="w-full sm:w-auto text-center font-semibold bg-[#1a1a1a] p-4 px-8 rounded-full border border-gray-700 hover:bg-[#222] hover:border-sky-400 hover:shadow-[0_0_20px_rgba(137,207,240,0.3)] transition-all duration-300">
                   <ShinyText text="Explore My Projects" disabled={false} speed={3} className="custom-class" />
                 </a>
               </div>
             </div>
 
             {/* Right Col (Desktop) / Hidden on Mobile */}
-            <div className="hidden md:flex justify-center items-center md:ml-auto animate__animated animate__fadeInUp animate__delay-4s order-2">
-              <div className="relative w-full max-w-[420px]">
+            <div className="hidden md:flex justify-center items-center md:ml-auto order-2">
+              <div className="relative w-full max-w-[420px] hero-profile">
                 <ProfileCard
                   name="Haniif Satria W"
                   title="Full Stack Developer / AI Enthusiast"
@@ -152,13 +189,13 @@ function App() {
           </div>
 
           {/* About Section */}
-          <div className="mt-32 mx-auto w-full max-w-[1600px] rounded-[32px] border border-white/5 bg-zinc-900/40 backdrop-blur-2xl shadow-2xl p-4 sm:p-12 relative overflow-hidden group hover:border-emerald-500/20 transition-all duration-700" id="about">
+          <div className="mt-32 mx-auto w-full max-w-[1600px] rounded-[32px] border border-white/5 bg-zinc-900/40 backdrop-blur-2xl shadow-2xl p-4 sm:p-12 relative overflow-hidden group hover:border-sky-500/20 transition-all duration-700" id="about">
             {/* Background Glows for large card */}
-            <div className="absolute -top-24 -right-24 w-64 h-64 bg-emerald-500/5 blur-[100px] rounded-full group-hover:bg-emerald-500/10 transition-colors" />
-            <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-emerald-500/5 blur-[100px] rounded-full" />
+            <div className="absolute -top-24 -right-24 w-64 h-64 bg-sky-500/5 blur-[100px] rounded-full group-hover:bg-sky-500/10 transition-colors" />
+            <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-sky-500/5 blur-[100px] rounded-full" />
             
-            <div className="flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-12 pt-0 px-2 sm:px-8 relative z-10" data-aos="fade-up">
-              <div className="basis-full md:basis-5/12 pr-0 md:pr-8 border-none md:border-b-0 md:border-r md:border-emerald-500/20 overflow-visible max-w-full flex justify-center py-0 sm:py-0 min-h-[400px] md:min-h-0">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-12 pt-0 px-2 sm:px-8 relative z-10" data-gsap="reveal">
+              <div className="basis-full md:basis-5/12 pr-0 md:pr-8 border-none md:border-b-0 md:border-r md:border-sky-500/20 overflow-visible max-w-full flex justify-center py-0 sm:py-0 min-h-[400px] md:min-h-0">
                 {isMobile ? (
                   <Card3DViewer />
                 ) : (
@@ -168,34 +205,30 @@ function App() {
 
               <div className="basis-full md:basis-7/12 pl-0 md:pl-8 py-4 sm:py-0">
                 <div className="flex-1 text-left">
-                  <h2 className="text-3xl md:text-4xl font-bold mb-5 tracking-tight">
-                    <ShinyText text="About Me" speed={3} />
+                  <h2 className="text-3xl md:text-4xl font-black mb-6 tracking-tight bg-gradient-to-b from-white to-white/40 bg-clip-text text-transparent uppercase">
+                    About Me
                   </h2>
 
-                  <BlurText
-                    text="Yo, I’m Haniif Satria Wardana! Currently pulling a Double Degree in Computer Science at Binus International and AI at RMIT Melbourne. I’m basically obsessed with learning new tech stacks and bridging the gap between heavy-duty backend models and those clean, aesthetic frontend designs. If it’s new, I’m probably already learning it. Driven by precision, powered by AI, and low-key addicted to writing clean, scalable code."
-                    delay={50}
-                    animateBy="words"
-                    direction="top"
-                    className="text-sm sm:text-base md:text-lg leading-relaxed mb-10 text-gray-300"
-                  />
+                  <p className="text-sm sm:text-base md:text-lg leading-relaxed mb-10 text-gray-300">
+                    Yo, I’m Haniif Satria Wardana! Currently pulling a Double Degree in Computer Science at Binus International and AI at RMIT Melbourne. I’m basically obsessed with learning new tech stacks and bridging the gap between heavy-duty backend models and those clean, aesthetic frontend designs. If it’s new, I’m probably already learning it. Driven by precision, powered by AI, and low-key addicted to writing clean, scalable code.
+                  </p>
 
                   <div className="flex flex-col sm:flex-row items-center sm:justify-between text-center sm:text-left gap-y-8 sm:gap-y-0 mb-4 w-full">
                     <div>
                       <h1 className="text-3xl md:text-4xl mb-1 mt-0">
-                        30<span className="text-emerald-500">+</span>
+                        30<span className="text-sky-500">+</span>
                       </h1>
                       <p className="m-0">Project Finished</p>
                     </div>
                     <div>
                       <h1 className="text-3xl md:text-4xl mb-1 mt-0">
-                        3<span className="text-emerald-500">+</span>
+                        3<span className="text-sky-500">+</span>
                       </h1>
                       <p className="m-0">Years of Experience</p>
                     </div>
                     <div>
                       <h1 className="text-3xl md:text-4xl mb-1 mt-0">
-                        3.57<span className="text-emerald-500">/4.00</span>
+                        3.57<span className="text-sky-500">/4.00</span>
                       </h1>
                       <p className="m-0">GPA</p>
                     </div>
@@ -203,9 +236,8 @@ function App() {
 
                   <ShinyText
                     text="Working with heart, creating with mind."
-                    disabled={false}
-                    speed={3}
-                    className="text-sm md:text-base text-emerald-400"
+                    disabled={true}
+                    className="text-sm md:text-base text-sky-400"
                   />
                 </div>
               </div>
@@ -220,10 +252,10 @@ function App() {
         {/* Tools Section */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="tools mt-10">
-            <h1 className="text-4xl font-bold mb-4 tracking-tight" data-aos="fade-up">
-              <ShinyText text="Tools & Technologies" speed={3} />
+            <h1 className="text-3xl md:text-4xl font-black mb-6 tracking-tight bg-gradient-to-b from-white to-white/40 bg-clip-text text-transparent uppercase" data-gsap="reveal">
+              Tools & Technologies
             </h1>
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10" data-aos="fade-up">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10" data-gsap="reveal">
               <p className="w-full md:w-2/5 text-base opacity-50">My Professional Skills & Technical Arsenal</p>
               
               <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
@@ -231,7 +263,7 @@ function App() {
                 <div className="relative group w-full sm:w-48">
                   <select 
                     onChange={(e) => setSelectedCategory(e.target.value)}
-                    className="w-full bg-zinc-900/50 border border-zinc-800 p-3 px-4 rounded-xl focus:ring-2 focus:ring-emerald-500/50 outline-none text-white transition-all hover:border-zinc-700 appearance-none cursor-pointer"
+                    className="w-full bg-zinc-900/50 border border-zinc-800 p-3 px-4 rounded-xl focus:ring-2 focus:ring-sky-500/50 outline-none text-white transition-all hover:border-zinc-700 appearance-none cursor-pointer"
                   >
                     <option value="All">All Categories</option>
                     <option value="lang">Programming</option>
@@ -251,9 +283,9 @@ function App() {
                     placeholder="Search tools..." 
                     value={searchSource}
                     onChange={(e) => setSearchSource(e.target.value)}
-                    className="w-full bg-zinc-900/50 border border-zinc-800 p-3 pl-10 rounded-xl focus:ring-2 focus:ring-emerald-500/50 outline-none text-white transition-all hover:border-zinc-700"
+                    className="w-full bg-zinc-900/50 border border-zinc-800 p-3 pl-10 rounded-xl focus:ring-2 focus:ring-sky-500/50 outline-none text-white transition-all hover:border-zinc-700"
                   />
-                  <svg className="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500 group-focus-within:text-emerald-500 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500 group-focus-within:text-sky-500 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                   </svg>
                 </div>
@@ -277,7 +309,6 @@ function App() {
                 return matchesSearch && matchesCategory;
               });
 
-              const [isToolsExpanded, setIsToolsExpanded] = useState(false);
               const limit = 12;
               const hasMoreTools = allFiltered.length > limit;
               const toolsToShow = (searchSource || isToolsExpanded || selectedCategory !== "All") ? allFiltered : allFiltered.slice(0, limit);
@@ -294,23 +325,16 @@ function App() {
                           layout
                           key={tool.id}
                           initial={{ opacity: 0, y: 20 }}
-                          animate={{ 
-                            opacity: 1, 
-                            y: 0,
-                            transition: { 
-                              delay: (index % 4) * 0.05,
-                              type: "spring",
-                              stiffness: 100,
-                              damping: 15
-                            }
-                          }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.4, delay: (index % 12) * 0.05 }}
+                          viewport={{ once: true }}
                           exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.1 } }}
-                          className="flex items-center gap-5 p-5 border border-white/5 rounded-[24px] bg-zinc-900/40 backdrop-blur-xl hover:bg-zinc-800/60 transition-all duration-500 group shadow-2xl relative overflow-hidden"
+                          className="tool-card flex items-center gap-5 p-5 border border-white/5 rounded-[24px] bg-zinc-900/40 backdrop-blur-xl hover:bg-zinc-800/60 transition-all duration-500 group shadow-2xl relative overflow-hidden"
                         >
                           {/* Hover Glow */}
-                          <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                          <div className="absolute inset-0 bg-gradient-to-br from-sky-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                           
-                          <div className="relative z-10 w-12 h-12 bg-zinc-950/50 p-2.5 rounded-2xl border border-white/5 group-hover:border-emerald-500/30 transition-all duration-500 flex items-center justify-center">
+                          <div className="relative z-10 w-12 h-12 bg-zinc-950/50 p-2.5 rounded-2xl border border-white/5 group-hover:border-sky-500/30 transition-all duration-500 flex items-center justify-center">
                             <img
                               src={tool.gambar}
                               alt={tool.nama}
@@ -343,7 +367,7 @@ function App() {
                   {!searchSource && selectedCategory === "All" && hasMoreTools && (
                     <button 
                       onClick={() => setIsToolsExpanded(!isToolsExpanded)}
-                      className="bg-zinc-900/50 hover:bg-zinc-800 border border-zinc-800 p-3 px-8 rounded-full text-emerald-500 font-semibold shadow-xl transition-all duration-300 hover:shadow-emerald-500/20 active:scale-95 flex items-center gap-2 group"
+                      className="bg-zinc-900/50 hover:bg-zinc-800 border border-zinc-800 p-3 px-8 rounded-full text-sky-500 font-semibold shadow-xl transition-all duration-300 hover:shadow-sky-500/20 active:scale-95 flex items-center gap-2 group"
                     >
                       <span>{isToolsExpanded ? "Show Less" : `Show All (${allFiltered.length - limit} more)`}</span>
                       <svg className={`w-4 h-4 transition-transform duration-300 ${isToolsExpanded ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -358,8 +382,8 @@ function App() {
 
           {/* Achievements & Publications Section */}
           <div className="achievements mt-32" id="achievements">
-            <h1 className="text-4xl font-bold mb-12 tracking-tight" data-aos="fade-up">
-              <ShinyText text="Certificates & Publications" speed={3} />
+            <h1 className="text-3xl md:text-4xl font-black mb-12 tracking-tight bg-gradient-to-b from-white to-white/40 bg-clip-text text-transparent uppercase" data-gsap="reveal">
+              Certificates & Publications
             </h1>
 
             <div className="grid lg:grid-cols-2 gap-12">
@@ -368,7 +392,7 @@ function App() {
                 <motion.h3 
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  className="text-2xl font-bold text-emerald-400 flex items-center gap-3"
+                  className="text-2xl font-bold text-sky-400 flex items-center gap-3"
                 >
                   <RiGraduationCapFill className="w-8 h-8" />
                   Academic Publications
@@ -381,22 +405,22 @@ function App() {
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ delay: idx * 0.1 }}
                       viewport={{ once: true }}
-                      className="p-8 rounded-[24px] bg-zinc-900/40 backdrop-blur-xl border border-white/5 hover:border-emerald-500/30 transition-all duration-500 group relative overflow-hidden shadow-2xl"
+                      className="p-8 rounded-[24px] bg-zinc-900/40 backdrop-blur-xl border border-white/5 hover:border-sky-500/30 transition-all duration-500 group relative overflow-hidden shadow-2xl"
                     >
-                      <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 blur-3xl -z-10 group-hover:bg-emerald-500/10 transition-colors" />
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-sky-500/5 blur-3xl -z-10 group-hover:bg-sky-500/10 transition-colors" />
                       <div className="flex justify-between items-start mb-6">
-                        <span className="text-[10px] font-black uppercase tracking-[0.2em] bg-emerald-500/10 text-emerald-500 px-4 py-1.5 rounded-full border border-emerald-500/20">
+                        <span className="text-[10px] font-black uppercase tracking-[0.2em] bg-sky-500/10 text-sky-500 px-4 py-1.5 rounded-full border border-sky-500/20">
                           {pub.journal}
                         </span>
                         <span className="text-sm text-zinc-600 font-mono font-bold tracking-tighter">{pub.date}</span>
                       </div>
-                      <h4 className="text-2xl font-black text-white mb-4 group-hover:text-emerald-400 transition-colors leading-tight uppercase line-clamp-2">{pub.title}</h4>
+                      <h4 className="text-2xl font-black text-white mb-4 group-hover:text-sky-400 transition-colors leading-tight uppercase line-clamp-2">{pub.title}</h4>
                       <p className="text-zinc-500 text-sm leading-relaxed mb-8 font-medium italic line-clamp-2">"{pub.description}"</p>
                       <a 
                         href={pub.url} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-3 text-emerald-500 font-black text-xs tracking-widest hover:gap-5 transition-all group/link"
+                        className="inline-flex items-center gap-3 text-sky-500 font-black text-xs tracking-widest hover:gap-5 transition-all group/link"
                       >
                         ACCESS RESEARCH <RiArrowRightLine className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
                       </a>
@@ -410,7 +434,7 @@ function App() {
                 <motion.h3 
                   initial={{ opacity: 0, x: 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  className="text-2xl font-bold text-emerald-400 flex items-center gap-3"
+                  className="text-2xl font-bold text-sky-400 flex items-center gap-3"
                 >
                   <RiVerifiedBadgeFill className="w-8 h-8" />
                   Professional Certifications
@@ -424,11 +448,11 @@ function App() {
                       transition={{ delay: idx * 0.1 }}
                       viewport={{ once: true }}
                       whileHover={{ y: -10, rotateZ: idx % 2 === 0 ? 1 : -1 }}
-                      className="group relative flex flex-col h-full rounded-2xl bg-zinc-900/20 border border-white/5 overflow-hidden hover:border-emerald-500/40 hover:shadow-[0_20px_50px_rgba(16,185,129,0.15)] transition-all duration-500"
+                      className="group relative flex flex-col h-full rounded-2xl bg-zinc-900/20 border border-white/5 overflow-hidden hover:border-sky-500/40 hover:shadow-[0_20px_50px_rgba(137,207,240,0.15)] transition-all duration-500"
                     >
                       {/* Badge Ribbon */}
                       <div className="absolute top-4 right-4 z-20">
-                         <div className="bg-emerald-500 text-black text-[8px] font-black px-2 py-0.5 rounded shadow-lg transform rotate-12">VERIFIED</div>
+                         <div className="bg-sky-500 text-black text-[8px] font-black px-2 py-0.5 rounded shadow-lg transform rotate-12">VERIFIED</div>
                       </div>
 
                       <div className="h-44 w-full relative overflow-hidden bg-zinc-800/10">
@@ -443,7 +467,7 @@ function App() {
                       </div>
 
                       <div className="p-6 flex flex-col flex-grow relative -mt-8 bg-zinc-900/80 backdrop-blur-md rounded-t-3xl">
-                        <div className="text-[10px] text-emerald-500 font-black uppercase tracking-widest mb-2">{cert.issuer}</div>
+                        <div className="text-[10px] text-sky-500 font-black uppercase tracking-widest mb-2">{cert.issuer}</div>
                         <h4 className="text-base font-bold text-zinc-100 group-hover:text-white transition-colors leading-tight mb-6">{cert.title}</h4>
                         
                         <div className="mt-auto pt-4 border-t border-white/5 flex items-center justify-between">
@@ -452,7 +476,7 @@ function App() {
                             href={cert.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-[10px] text-zinc-300 font-bold hover:text-emerald-400 transition-colors flex items-center gap-1 group/btn"
+                            className="text-[10px] text-zinc-300 font-bold hover:text-sky-400 transition-colors flex items-center gap-1 group/btn"
                           >
                             CREDENTIAL <RiExternalLinkLine className="w-3.5 h-3.5 group-hover/btn:-translate-y-0.5 group-hover/btn:translate-x-0.5 transition-transform" />
                           </a>
@@ -467,22 +491,22 @@ function App() {
 
           {/* Project Section */}
           <div className="proyek mt-40 py-10 relative" id="project">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[600px] bg-emerald-500/5 blur-[150px] rounded-full -z-10" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[600px] bg-sky-500/5 blur-[150px] rounded-full -z-10" />
             
-            <div className="text-center mb-16" data-aos="fade-up">
-              <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight">
-                <ShinyText text="Selected Projects" speed={3} />
-              </h2>
+            <div className="text-center mb-16" data-gsap="reveal">
+              <h1 className="text-3xl md:text-4xl font-black mb-8 tracking-tight bg-gradient-to-b from-white to-white/40 bg-clip-text text-transparent uppercase">
+                Selected Projects
+              </h1>
             </div>
 
-            <div style={{ height: 'auto', position: 'relative' }} data-aos="zoom-in" data-aos-delay="200">
+            <div style={{ height: 'auto', position: 'relative' }} data-gsap="reveal">
               <ChromaGrid items={listProyek} onItemClick={handleProjectClick} radius={500} damping={0.45} fadeOut={0.6} ease="power3.out"/>
             </div>
           </div>
         </div>
 
         {/* Scroll Velocity Animation - TRULY OUTSIDE ANY CONTAINER - DIRECT UNDER MAIN */}
-        <div className="mt-10 w-full overflow-hidden" data-aos="fade-up">
+        <div className="mt-10 w-full overflow-hidden" data-gsap="reveal">
           <ScrollVelocity />
         </div>
 
@@ -490,12 +514,12 @@ function App() {
           {/* Contact Section */}
           <div className="kontak mt-16 pb-20 relative" id="contact">
             {/* Background Glows */}
-            <div className="absolute -top-40 left-0 w-72 h-72 bg-emerald-500/10 blur-[120px] rounded-full -z-10 animate-pulse" />
-            <div className="absolute bottom-0 right-0 w-96 h-96 bg-emerald-500/5 blur-[150px] rounded-full -z-10" />
+            <div className="absolute -top-40 left-0 w-72 h-72 bg-sky-500/10 blur-[120px] rounded-full -z-10 animate-pulse" />
+            <div className="absolute bottom-0 right-0 w-96 h-96 bg-sky-500/5 blur-[150px] rounded-full -z-10" />
             
-            <div className="text-center mb-10" data-aos="fade-up">
-              <h2 className="text-5xl md:text-6xl font-black mb-6 tracking-tight bg-gradient-to-b from-white to-white/40 bg-clip-text text-transparent italic uppercase">
-                Let's Build Something <span className="text-emerald-500 not-italic">Epic</span>.
+            <div className="text-center mb-10" data-gsap="reveal">
+              <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tight bg-gradient-to-b from-white to-white/40 bg-clip-text text-transparent uppercase">
+                Let's Build Something <span className="text-sky-500 not-italic">Epic</span>.
               </h2>
               <div className="max-w-2xl mx-auto px-4">
                 <BlurText 
@@ -511,48 +535,48 @@ function App() {
             <div className="max-w-4xl mx-auto w-full">
               <div className="flex flex-col gap-12">
                 {/* Advanced Form */}
-                <div className="" data-aos="fade-up">
-                  <div className="bg-zinc-900/60 backdrop-blur-3xl p-8 md:p-12 w-full rounded-[40px] shadow-2xl border border-emerald-500/10 relative overflow-hidden group">
-                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-emerald-500/30 to-transparent" />
+                <div className="" data-gsap="reveal">
+                  <div className="bg-zinc-900/60 backdrop-blur-3xl p-8 md:p-12 w-full rounded-[40px] shadow-2xl border border-sky-500/10 relative overflow-hidden group">
+                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-sky-500/30 to-transparent" />
                     
                     <form action="https://formsubmit.co/niifw39@gmail.com" method="POST" className="relative z-10 flex flex-col gap-10">
                       <div className="grid md:grid-cols-2 gap-8">
-                        <div className="flex flex-col gap-4">
-                          <label className="text-[10px] font-black text-emerald-500 uppercase tracking-[0.2em] ml-2">WHO ARE YOU?</label>
+                        <div className="flex flex-col gap-4 text-left">
+                          <label className="text-[10px] font-black text-sky-500 uppercase tracking-[0.2em] ml-2">WHO ARE YOU?</label>
                           <input 
                             type="text" 
                             name="Name" 
                             placeholder="Ex: Haniif Wardana" 
-                            className="bg-black/40 border border-zinc-800 p-5 rounded-2xl focus:ring-4 focus:ring-emerald-500/10 focus:border-emerald-500/50 outline-none text-white transition-all placeholder:text-zinc-700" 
+                            className="bg-black/40 border border-zinc-800 p-5 rounded-2xl focus:ring-4 focus:ring-sky-500/10 focus:border-sky-500/50 outline-none text-white transition-all placeholder:text-zinc-700" 
                             required
                           />
                         </div>
-                        <div className="flex flex-col gap-4">
-                          <label className="text-[10px] font-black text-emerald-500 uppercase tracking-[0.2em] ml-2">WHERE TO REPLY?</label>
+                        <div className="flex flex-col gap-4 text-left">
+                          <label className="text-[10px] font-black text-sky-500 uppercase tracking-[0.2em] ml-2">WHERE TO REPLY?</label>
                           <input 
                             type="email" 
                             name="Email" 
                             placeholder="Ex: hello@company.com" 
-                            className="bg-black/40 border border-zinc-800 p-5 rounded-2xl focus:ring-4 focus:ring-emerald-500/10 focus:border-emerald-500/50 outline-none text-white transition-all placeholder:text-zinc-700" 
+                            className="bg-black/40 border border-zinc-800 p-5 rounded-2xl focus:ring-4 focus:ring-sky-500/10 focus:border-sky-500/50 outline-none text-white transition-all placeholder:text-zinc-700" 
                             required
                           />
                         </div>
                       </div>
 
-                      <div className="flex flex-col gap-4">
-                        <label className="text-[10px] font-black text-emerald-500 uppercase tracking-[0.2em] ml-2">TELL ME EVERYTHING</label>
+                      <div className="flex flex-col gap-4 text-left">
+                        <label className="text-[10px] font-black text-sky-500 uppercase tracking-[0.2em] ml-2">TELL ME EVERYTHING</label>
                         <textarea 
                           name="message" 
                           rows="6" 
                           placeholder="I'm looking for a developer who can..." 
-                          className="bg-black/40 border border-zinc-800 p-5 rounded-2xl focus:ring-4 focus:ring-emerald-500/10 focus:border-emerald-500/50 outline-none text-white transition-all resize-none placeholder:text-zinc-700" 
+                          className="bg-black/40 border border-zinc-800 p-5 rounded-2xl focus:ring-4 focus:ring-sky-500/10 focus:border-sky-500/50 outline-none text-white transition-all resize-none placeholder:text-zinc-700" 
                           required
                         ></textarea>
                       </div>
 
                       <button 
                         type="submit" 
-                        className="group/btn relative font-black text-xs sm:text-sm uppercase tracking-widest bg-emerald-500 p-4 md:p-6 rounded-2xl w-full overflow-hidden transition-all duration-500 hover:shadow-[0_15px_40px_rgba(16,185,129,0.3)] text-black flex items-center justify-center gap-4"
+                        className="group/btn relative font-black text-xs sm:text-sm uppercase tracking-widest bg-sky-500 p-4 md:p-6 rounded-2xl w-full overflow-hidden transition-all duration-500 hover:shadow-[0_15px_40px_rgba(137,207,240,0.3)] text-black flex items-center justify-center gap-4"
                       >
                         <span className="absolute inset-0 bg-white opacity-0 group-hover/btn:opacity-20 transition-opacity" />
                         SEND TRANSMISSION
@@ -565,7 +589,7 @@ function App() {
                 </div>
 
                 {/* Integrated ChatRoom below the form for a cleaner look */}
-                <div className="w-full" data-aos="fade-up">
+                <div className="w-full" data-gsap="reveal">
                   <ChatRoom />
                 </div>
               </div>

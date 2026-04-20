@@ -1,17 +1,29 @@
+import { useEffect, useRef } from "react";
 import "remixicon/fonts/remixicon.css";
-import Dock from "./Dock/Dock";
-import { VscHome, VscArchive, VscAccount } from "react-icons/vsc";
 import RobotCursor from "./RobotCursor";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const Footer = () => {
-  const items = [
-    { icon: <VscHome size={18} />, label: "Home", onClick: () => document.getElementById("home")?.scrollIntoView({ behavior: "smooth" }) },
-    { icon: <VscAccount size={18} />, label: "About Me", onClick: () => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" }) },
-    { icon: <VscArchive size={18} />, label: "Project", onClick: () => document.getElementById("project")?.scrollIntoView({ behavior: "smooth" }) },
-  ];
+  const nameRef = useRef(null);
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    
+    gsap.to(nameRef.current, {
+      scrollTrigger: {
+        trigger: nameRef.current,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1,
+      },
+      y: -100,
+      ease: "none"
+    });
+  }, []);
 
   return (
-    <div className="mt-32 pb-8 flex flex-col items-center relative z-10 w-full overflow-hidden">
+    <div className="mt-32 pb-16 flex flex-col items-center relative z-10 w-full overflow-hidden">
       {/* Massive Name Display with Robot Full Width */}
       <div className="relative w-full flex flex-col md:flex-row justify-center md:justify-end items-center py-10 md:py-20 min-h-[40vh] px-[5vw] md:px-[10vw] gap-0 md:gap-0">
         {/* Mobile Robot Container (Top) */}
@@ -19,30 +31,30 @@ const Footer = () => {
           <RobotCursor />
         </div>
         
-        <h1 className="text-[15vw] md:text-[20vw] font-black leading-none tracking-tighter text-white opacity-95 select-none text-center z-10 translate-y-[-2vh] md:translate-y-0">
+        <h1 
+          ref={nameRef}
+          className="text-[15vw] md:text-[20vw] font-black leading-none tracking-tighter text-white opacity-95 select-none text-center z-10 translate-y-[-2vh] md:translate-y-0"
+        >
           HANIIF
         </h1>
       </div>
 
-      {/* Grid container for other footer info */}
-      <div className="w-full max-w-7xl mx-auto flex flex-col md:flex-row items-center md:justify-between gap-10 mt-10 border-t border-white/10 pt-10 px-6">
+      {/* Tidy Footer Footer info */}
+      <div className="w-full max-w-7xl mx-auto flex flex-col items-center gap-8 mt-10 border-t border-white/10 pt-12 px-6">
         
-        {/* Social Icons */}
-        <div className="flex gap-6 order-2 md:order-none">
-          <a href="https://github.com/Mbulss/" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-emerald-400 hover:drop-shadow-[0_0_8px_rgba(52,211,153,0.5)] transition-all duration-300"><i className="ri-github-fill ri-2x"></i></a>
-          <a href="https://www.linkedin.com/in/haniif-satria-wardana/" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-emerald-400 hover:drop-shadow-[0_0_8px_rgba(52,211,153,0.5)] transition-all duration-300"><i className="ri-linkedin-box-fill ri-2x"></i></a>
-          <a href="https://www.instagram.com/haniifsatria/" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-emerald-400 hover:drop-shadow-[0_0_8px_rgba(52,211,153,0.5)] transition-all duration-300"><i className="ri-instagram-fill ri-2x"></i></a>
+        {/* Social Icons - Centered */}
+        <div className="flex gap-8">
+          <a href="https://github.com/Mbulss/" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-sky-400 hover:drop-shadow-[0_0_12px_rgba(137,207,240,0.5)] transition-all duration-300 transform hover:scale-110">
+            <i className="ri-github-fill text-3xl"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/haniif-satria-wardana/" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-sky-400 hover:drop-shadow-[0_0_12px_rgba(137,207,240,0.5)] transition-all duration-300 transform hover:scale-110">
+            <i className="ri-linkedin-box-fill text-3xl"></i>
+          </a>
+          <a href="https://www.instagram.com/haniifsatria/" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-sky-400 hover:drop-shadow-[0_0_12px_rgba(137,207,240,0.5)] transition-all duration-300 transform hover:scale-110">
+            <i className="ri-instagram-fill text-3xl"></i>
+          </a>
         </div>
 
-        {/* Dock */}
-        <div className="order-3 md:order-none">
-          <Dock 
-            items={items}
-            panelHeight={30}
-            baseItemSize={60}
-            magnification={100}
-          />
-        </div>
       </div>
     </div>
   );

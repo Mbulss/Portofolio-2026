@@ -33,13 +33,13 @@
   
   --mouse-x: 50%;
   --mouse-y: 50%;
-  --spotlight-color: rgba(16, 185, 129, 0.1);
+  --spotlight-color: rgba(137, 207, 240, 0.1);
 }
 
 .chroma-card:hover {
-  border-color: rgba(16, 185, 129, 0.3);
+  border-color: rgba(137, 207, 240, 0.3);
   transform: translateY(-8px);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 20px rgba(16, 185, 129, 0.1);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 20px rgba(137, 207, 240, 0.1);
   background: rgba(20, 20, 20, 0.5);
 }
 

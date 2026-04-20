@@ -23,7 +23,7 @@ const JourneyItem = ({ item, index }) => {
       {/* Laser Connector (Desktop only): Adjusted vertical alignment with 0.1px translate fix */}
       <div className={`hidden md:block absolute top-[50.2%] -translate-y-1/2 w-[calc(50%-42px)] h-[1px] ${isEven ? 'left-[42px] origin-left' : 'right-[42px] origin-right'}`}>
          <motion.div 
-            className="w-full h-full bg-emerald-500 shadow-[0_0_15px_#10b981]"
+            className="w-full h-full bg-sky-500 shadow-[0_0_15px_#0ea5e9]"
             style={{ scaleX: connectorWidth }}
          />
       </div>
@@ -33,13 +33,13 @@ const JourneyItem = ({ item, index }) => {
            className="journey-dot relative group"
            style={{ 
              scale: useTransform(scrollYProgress, [0.4, 0.7, 1], [0.8, 1.25, 1.25]),
-             borderColor: useTransform(scrollYProgress, [0.4, 0.7, 1], ["rgba(16,185,129,0.2)", "#10b981", "#10b981"]),
-             boxShadow: useTransform(scrollYProgress, [0.4, 0.7, 1], ["0 0 0px #10b981", "0 0 20px #10b981", "0 0 20px #10b981"])
+             borderColor: useTransform(scrollYProgress, [0.4, 0.7, 1], ["rgba(14,165,233,0.2)", "#0ea5e9", "#0ea5e9"]),
+             boxShadow: useTransform(scrollYProgress, [0.4, 0.7, 1], ["0 0 0px #0ea5e9", "0 0 20px #0ea5e9", "0 0 20px #0ea5e9"])
            }}
         >
           {/* Animated Ring */}
           <motion.div 
-            className="absolute inset-[-6px] border border-emerald-500/30 rounded-full z-10"
+            className="absolute inset-[-6px] border border-sky-500/30 rounded-full z-10"
             animate={{ rotate: 360 }}
             transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
           />
@@ -60,7 +60,7 @@ const JourneyItem = ({ item, index }) => {
           <div className="journey-card-header flex justify-between items-start mb-4">
              <div className="flex flex-col gap-1">
                 <span className="journey-date font-mono text-[10px] sm:text-xs opacity-60 uppercase tracking-tighter">{item.date}</span>
-                <span className="journey-category text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-emerald-400 bg-emerald-400/10 px-2 py-1 rounded-md inline-block w-fit">{item.category}</span>
+                <span className="journey-category text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-sky-400 bg-sky-400/10 px-2 py-1 rounded-md inline-block w-fit">{item.category}</span>
              </div>
              {item.logo && (
                <div className="w-10 h-10 bg-white p-1.5 rounded-xl shadow-[0_0_20px_rgba(255,255,255,0.1)]">
@@ -68,12 +68,12 @@ const JourneyItem = ({ item, index }) => {
                </div>
              )}
           </div>
-          <h3 className="journey-title text-xl sm:text-2xl font-black mb-2 group-hover:text-emerald-400 transition-colors uppercase leading-tight">{item.title}</h3>
-          <p className="journey-location text-emerald-500/80 font-bold mb-4 text-xs sm:text-sm italic">{item.location}</p>
+          <h3 className="journey-title text-xl sm:text-2xl font-black mb-2 group-hover:text-sky-400 transition-colors uppercase leading-tight">{item.title}</h3>
+          <p className="journey-location text-sky-500/80 font-bold mb-4 text-xs sm:text-sm italic">{item.location}</p>
           <p className="journey-description text-zinc-500 text-xs sm:text-sm leading-relaxed font-medium">{item.description}</p>
         </div>
         
-        <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+        <div className="absolute top-0 right-0 w-32 h-32 bg-sky-500/5 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
       </motion.div>
     </div>
   );
@@ -100,12 +100,12 @@ const Journey = () => {
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            className="inline-block px-4 py-1 rounded-full border border-emerald-500/20 bg-emerald-500/5 text-emerald-500 text-xs font-bold uppercase tracking-widest mb-6"
+            className="inline-block px-4 py-1 rounded-full border border-sky-500/20 bg-sky-500/5 text-sky-500 text-xs font-bold uppercase tracking-widest mb-6"
           >
             Evolution
           </motion.div>
-          <h2 className="text-5xl md:text-7xl font-black tracking-tighter mb-4">
-            <ShinyText text="My Journey" speed={3} />
+          <h2 className="text-3xl md:text-4xl font-black tracking-tight mb-4 bg-gradient-to-b from-white to-white/40 bg-clip-text text-transparent uppercase">
+            My Journey
           </h2>
         </div>
         
@@ -113,7 +113,7 @@ const Journey = () => {
           {/* SVG Progress Path - Double Neon Line */}
           <div className="absolute left-[50%] -translate-x-1/2 top-0 bottom-0 w-[4px] bg-white/10 h-full rounded-full overflow-hidden">
              <motion.div 
-                className="w-full bg-emerald-500 origin-top shadow-[0_0_25px_#10b981]"
+                className="w-full bg-sky-500 origin-top shadow-[0_0_25px_#0ea5e9]"
                 style={{ scaleY: pathLength, height: '100%' }}
              />
              

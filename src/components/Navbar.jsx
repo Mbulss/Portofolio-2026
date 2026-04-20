@@ -48,10 +48,10 @@ const Navbar = ({ hidden = false }) => {
               <li key={link.name}>
                 <a 
                   href={link.href} 
-                  className="text-[10px] sm:text-sm font-semibold text-gray-400 hover:text-emerald-400 transition-colors relative group tracking-tight whitespace-nowrap"
+                  className="text-[10px] sm:text-sm font-semibold text-gray-400 hover:text-sky-400 transition-colors relative group tracking-tight whitespace-nowrap"
                 >
                   {link.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-400 transition-all duration-300 group-hover:w-full shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sky-400 transition-all duration-300 group-hover:w-full shadow-[0_0_8px_rgba(137,207,240,0.8)]" />
                 </a>
               </li>
             ))}
@@ -59,7 +59,7 @@ const Navbar = ({ hidden = false }) => {
             <li>
               <a 
                 href="#contact" 
-                className="text-[10px] sm:text-sm font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-3 sm:px-6 py-1.5 sm:py-2.5 rounded-full hover:bg-emerald-500 hover:text-black transition-all transform hover:scale-105 active:scale-95 shadow-lg shadow-emerald-500/10 whitespace-nowrap"
+                className="text-[10px] sm:text-sm font-bold bg-sky-500/20 text-sky-400 border border-sky-500/30 px-3 sm:px-6 py-1.5 sm:py-2.5 rounded-full hover:bg-sky-500 hover:text-black transition-all transform hover:scale-105 active:scale-95 shadow-lg shadow-sky-500/10 whitespace-nowrap"
               >
                 Hire Me
               </a>

@@ -31,7 +31,7 @@
 .scroller span {
   display: block;
   margin-right: 50px;
-  background: linear-gradient(to bottom, #fff, #34d399);
+  background: linear-gradient(to bottom, #fff, #89CFF0);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -39,7 +39,7 @@
 }
 
 .scroller span:nth-child(even) {
-  background: linear-gradient(to bottom, #fff, #10b981);
+  background: linear-gradient(to bottom, #fff, #0ea5e9);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

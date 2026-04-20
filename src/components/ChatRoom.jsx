@@ -84,7 +84,7 @@ export default function ChatRoom() {
             <div
               className={`p-3 rounded-lg max-w-[75%] ${
                 msg.uid === user?.uid
-                  ? "bg-emerald-500 text-white shadow-[0_0_15px_rgba(16,185,129,0.3)]"
+                  ? "bg-sky-500 text-black shadow-[0_0_15px_rgba(137,207,240,0.3)]"
                   : "bg-gray-700 text-white"
               }`}
             >
@@ -110,11 +110,11 @@ export default function ChatRoom() {
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Write a message..."
-            className="flex-1 min-w-0 p-3 rounded-xl bg-zinc-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all placeholder:text-gray-500"
+            className="flex-1 min-w-0 p-3 rounded-xl bg-zinc-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all placeholder:text-gray-500"
           />
           <button
             type="submit"
-            className="bg-emerald-600 px-4 py-2 rounded-lg text-white hover:bg-emerald-700 w-full sm:w-auto"
+            className="bg-sky-600 px-4 py-2 rounded-lg text-white hover:bg-sky-700 w-full sm:w-auto"
           >
             Send
           </button>

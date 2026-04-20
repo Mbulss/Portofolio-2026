@@ -171,7 +171,7 @@ export const ChromaGrid = ({
               
               {/* Fixed height sub-title wrapper so it's uniform (fits up to 2 lines) */}
               <div className="h-[44px] mt-1 mb-2">
-                <p className="role text-emerald-400/80 font-medium line-clamp-2">{c.subtitle}</p>
+                <p className="role text-sky-400/80 font-medium line-clamp-2">{c.subtitle}</p>
               </div>
 
               {c.location && <span className="location">{c.location}</span>}
@@ -191,7 +191,7 @@ export const ChromaGrid = ({
                   target="_blank" 
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="flex-1 flex justify-center items-center bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500 hover:text-black border border-emerald-500/20 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-300 group/btn"
+                  className="flex-1 flex justify-center items-center bg-sky-500/10 text-sky-400 hover:bg-sky-500 hover:text-black border border-sky-500/20 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-300 group/btn"
                 >
                   Live Demo
                 </a>

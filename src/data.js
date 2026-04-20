@@ -56,8 +56,8 @@ export const listProyek = [
     title: "Finance Tracker AI",
     subtitle: "Smart Personal Finance Ecosystem with Automated Bank Sync & AI Telegram Assistant",
     fullDescription: "Revolutionize your wealth management with a comprehensive AI-powered platform. Effortlessly track finances through automated bank sync via secure email parsing and a feature-rich Telegram Bot that offers real-time notifications, weekly progress summaries, and manual entry capabilities. Experience the future of budgeting with intelligent receipt scanning and proactive financial insights, all in one seamless dashboard.",
-    borderColor: "#10B981",
-    gradient: "linear-gradient(145deg, #059669, #000)",
+    borderColor: "#89CFF0",
+    gradient: "linear-gradient(145deg, #7BB2E0, #000)",
     url: "https://finance-tracker-gamma-livid.vercel.app/",
     githubUrl: "https://github.com/haniifwardana/finance-tracker-ai",
     images: [
@@ -101,8 +101,8 @@ export const listProyek = [
     title: "Hishiro Ticketing System",
     subtitle: "Full-stack ticketing system with AI chatbot",
     fullDescription: "A high-performance enterprise support platform. Features a powerful centralized administrative dashboard, real-time customer engagement through live chat, and an intelligent AI assistant designed to resolve inquiries instantly.",
-    borderColor: "#10B981",
-    gradient: "linear-gradient(180deg, #10B981, #000)",
+    borderColor: "#89CFF0",
+    gradient: "linear-gradient(180deg, #89CFF0, #000)",
     url: "https://hishiro-ticketing-system.up.railway.app/",
     githubUrl: "https://github.com/Mbulss/Hishiro-Ticketing-System.git",
     images: [

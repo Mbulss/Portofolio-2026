@@ -65,7 +65,7 @@ const PreLoader = () => {
         >
           <div className="absolute inset-0 pointer-events-none">
             <Aurora
-              colorStops={["#577870", "#1F97A6", "#127B99"]}
+              colorStops={["#A2CFFE", "#B2FFFF", "#89CFF0"]}
               blend={0.5}
               amplitude={1.0}
               speed={0.5}

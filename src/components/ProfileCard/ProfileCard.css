@@ -13,12 +13,12 @@
   --icon: none;
   --behind-gradient: none;
   --inner-gradient: none;
-  --sunpillar-1: hsl(266, 100%, 73%); /* Violet */
-  --sunpillar-2: hsl(228, 100%, 74%); /* Blue */
-  --sunpillar-3: hsl(197, 100%, 73%); /* Sky */
-  --sunpillar-4: hsl(176, 100%, 76%); /* Cyan */
-  --sunpillar-5: hsl(160, 100%, 75%); /* Teal */
-  --sunpillar-6: hsl(283, 100%, 73%); /* Purple */
+  --sunpillar-1: hsl(210, 100%, 73%); /* Soft Blue */
+  --sunpillar-2: hsl(200, 100%, 74%); /* Sky Blue */
+  --sunpillar-3: hsl(190, 100%, 73%); /* Cyan Blue */
+  --sunpillar-4: hsl(205, 100%, 76%); /* Baby Blue */
+  --sunpillar-5: hsl(215, 100%, 75%); /* Steel Blue */
+  --sunpillar-6: hsl(225, 100%, 73%); /* Royal Blue */
   --sunpillar-clr-1: var(--sunpillar-1);
   --sunpillar-clr-2: var(--sunpillar-2);
   --sunpillar-clr-3: var(--sunpillar-3);
@@ -75,7 +75,7 @@
   transform: translate3d(0, 0, 0.1px) rotateX(0deg) rotateY(0deg);
   background-size: 100% 100%;
   background-position: 0 0, 0 0, 50% 50%, 0 0;
-  background-image: radial-gradient(farthest-side circle at var(--pointer-x) var(--pointer-y), hsla(266, 100%, 90%, var(--card-opacity)) 4%, hsla(266, 50%, 80%, calc(var(--card-opacity) * 0.75)) 10%, hsla(266, 25%, 70%, calc(var(--card-opacity) * 0.5)) 50%, hsla(266, 0%, 60%, 0) 100%), radial-gradient(35% 52% at 55% 20%, #00ffaac4 0%, #073aff00 100%), radial-gradient(100% 100% at 50% 50%, #00c1ffff 1%, #073aff00 76%), conic-gradient(from 124deg at 50% 50%, #c137ffff 0%, #07c6ffff 40%, #07c6ffff 60%, #c137ffff 100%);
+  background-image: radial-gradient(farthest-side circle at var(--pointer-x) var(--pointer-y), hsla(210, 100%, 90%, var(--card-opacity)) 4%, hsla(210, 50%, 80%, calc(var(--card-opacity) * 0.75)) 10%, hsla(210, 25%, 70%, calc(var(--card-opacity) * 0.5)) 50%, hsla(210, 0%, 60%, 0) 100%), radial-gradient(35% 52% at 55% 20%, #7BB2E0c4 0%, #0ea5e900 100%), radial-gradient(100% 100% at 50% 50%, #81d4faff 1%, #0ea5e900 76%), conic-gradient(from 124deg at 50% 50%, #3b82f6ff 0%, #0ea5e9ff 40%, #0ea5e9ff 60%, #3b82f6ff 100%);
   overflow: hidden;
 }
 
@@ -277,9 +277,9 @@
 
 .pc-contact-btn:hover {
   background: #222;
-  border-color: rgba(52, 211, 153, 1); /* emerald-400 border glow */
+  border-color: rgba(137, 207, 240, 1); /* sky-400 border glow */
   transform: translateY(-3px) scale(1.02); /* slight lift and scale */
-  box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4); /* emerald shadow glow */
+  box-shadow: 0 10px 25px rgba(137, 207, 240, 0.4); /* sky shadow glow */
 }
 
 .pc-contact-btn:active {
@@ -312,7 +312,7 @@
   font-weight: 700;
   margin: 0;
   font-size: min(5svh, 3em);
-  background-image: linear-gradient(to bottom, #fff 40%, rgba(52, 211, 153, 0.8));
+  background-image: linear-gradient(to bottom, #fff 40%, rgba(137, 207, 240, 0.8));
   -webkit-text-fill-color: transparent;
   background-clip: text;
   -webkit-background-clip: text;
@@ -327,7 +327,7 @@
   font-size: 16px;
   margin: 0 auto;
   width: min-content;
-  background-image: linear-gradient(to bottom, #fff 40%, rgba(16, 185, 129, 0.8));
+  background-image: linear-gradient(to bottom, #fff 40%, rgba(137, 207, 240, 0.8));
   -webkit-text-fill-color: transparent;
   background-clip: text;
   -webkit-background-clip: text;

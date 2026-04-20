@@ -49,7 +49,7 @@ const ProjectModal = ({ isOpen, onClose, project }) => {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className={`bg-zinc-950 border border-white/10 rounded-3xl shadow-2xl shadow-emerald-500/10 w-full max-w-[440px] max-h-[90vh] flex flex-col overflow-hidden transform transition-all duration-300 ${isClosing ? 'animate-out' : 'animate-in'}`}
+        className={`bg-zinc-950 border border-white/10 rounded-3xl shadow-2xl shadow-sky-500/10 w-full max-w-[440px] max-h-[90vh] flex flex-col overflow-hidden transform transition-all duration-300 ${isClosing ? 'animate-out' : 'animate-in'}`}
       >
         {/* --- HEADER MEDIA (Gallery / Video / Single) --- */}
         <div className="relative w-full aspect-video flex-shrink-0 bg-zinc-900 overflow-hidden border-b border-white/5 group">
@@ -83,13 +83,13 @@ const ProjectModal = ({ isOpen, onClose, project }) => {
                 <>
                   <button 
                     onClick={prevImg}
-                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-emerald-500 text-white p-1.5 rounded-full backdrop-blur-md transition-all opacity-0 group-hover:opacity-100 hidden sm:block z-10"
+                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-sky-500 text-white p-1.5 rounded-full backdrop-blur-md transition-all opacity-0 group-hover:opacity-100 hidden sm:block z-10"
                   >
                     <FiChevronLeft size={20} />
                   </button>
                   <button 
                     onClick={nextImg}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-emerald-500 text-white p-1.5 rounded-full backdrop-blur-md transition-all opacity-0 group-hover:opacity-100 hidden sm:block z-10"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-sky-500 text-white p-1.5 rounded-full backdrop-blur-md transition-all opacity-0 group-hover:opacity-100 hidden sm:block z-10"
                   >
                     <FiChevronRight size={20} />
                   </button>
@@ -103,7 +103,7 @@ const ProjectModal = ({ isOpen, onClose, project }) => {
                           e.stopPropagation();
                           setCurrentImgIndex(i);
                         }}
-                        className={`h-1 rounded-full transition-all duration-300 ${i === currentImgIndex ? 'w-4 bg-emerald-500' : 'w-1.5 bg-white/30'}`}
+                        className={`h-1 rounded-full transition-all duration-300 ${i === currentImgIndex ? 'w-4 bg-sky-500' : 'w-1.5 bg-white/30'}`}
                       />
                     ))}
                   </div>
@@ -120,7 +120,7 @@ const ProjectModal = ({ isOpen, onClose, project }) => {
           
           <button
             onClick={handleClose}
-            className="absolute top-4 right-4 bg-black/60 backdrop-blur-xl text-white p-2 rounded-full hover:bg-emerald-500 transition-all z-20 border border-white/10 shadow-lg"
+            className="absolute top-4 right-4 bg-black/60 backdrop-blur-xl text-white p-2 rounded-full hover:bg-sky-500 transition-all z-20 border border-white/10 shadow-lg"
           >
             <FiX size={18} />
           </button>
@@ -143,7 +143,7 @@ const ProjectModal = ({ isOpen, onClose, project }) => {
                   href={project.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-[1.5] inline-flex items-center justify-center gap-2 font-bold bg-emerald-500 text-black py-3 sm:py-2 rounded-xl sm:rounded-lg hover:bg-emerald-400 transition-all duration-300 text-sm sm:text-[11px]"
+                  className="flex-[1.5] inline-flex items-center justify-center gap-2 font-bold bg-sky-500 text-black py-3 sm:py-2 rounded-xl sm:rounded-lg hover:bg-sky-400 transition-all duration-300 text-sm sm:text-[11px]"
                 >
                   <FiExternalLink size={16} className="sm:size-[12px]" />
                   <span className="whitespace-nowrap italic">Live Demo</span>
@@ -183,7 +183,7 @@ const ProjectModal = ({ isOpen, onClose, project }) => {
       <style>{`
         .project-modal-scroll {
            scrollbar-width: thin;
-           scrollbar-color: rgba(16, 185, 129, 0.3) transparent;
+           scrollbar-color: rgba(137, 207, 240, 0.3) transparent;
         }
         .project-modal-scroll::-webkit-scrollbar {
           width: 4px;
