@@ -8,7 +8,7 @@ import Footer from "./components/Footer";
 import Journey from "./components/Journey/Journey";
 import CountUp from "./components/CountUp/CountUp";
 import { motion, AnimatePresence } from "framer-motion";
-import { RiGraduationCapFill, RiVerifiedBadgeFill, RiArrowRightLine, RiExternalLinkLine, RiMailSendLine } from "react-icons/ri";
+import { RiGraduationCapFill, RiVerifiedBadgeFill, RiArrowRightLine, RiExternalLinkLine, RiMailSendLine, RiCursorFill } from "react-icons/ri";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -38,6 +38,12 @@ function App() {
   const [isToolsExpanded, setIsToolsExpanded] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isLowPower, setIsLowPower] = useState(false);
+  const [showLanyardHint, setShowLanyardHint] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowLanyardHint(false), 20000);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
@@ -124,8 +130,10 @@ function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="hero grid md:grid-cols-2 flex-col items-center pt-24 gap-8 md:gap-16">
             <div className="hero-content flex flex-col items-center md:items-start text-center md:text-left order-1">
-              <h1 className="text-3xl md:text-5xl font-black mb-6 tracking-tight bg-gradient-to-b from-white to-white/40 bg-clip-text text-transparent uppercase">
-                Hi I'm Haniif Satria Wardana
+              <h1 className="text-3xl md:text-5xl font-black mb-6 tracking-tight uppercase font-[Poppins] leading-tight">
+                <span className="text-white/40 lowercase font-medium text-xl md:text-2xl whitespace-nowrap">hello i'm </span>
+                <span className="bg-gradient-to-b from-[#fff] to-[#89CFF0] bg-clip-text text-transparent">Haniif Satria Wardana</span>
+                <span className="text-xs md:text-base font-bold bg-gradient-to-r from-sky-400 to-blue-500 bg-clip-text text-transparent ml-2 opacity-70 tracking-widest align-middle">, Computer Scientist</span>
               </h1>
               
               <div className="md:hidden w-full flex justify-center mb-8">
@@ -188,22 +196,48 @@ function App() {
             <div className="flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-12 pt-0 px-2 sm:px-8 relative z-10" data-gsap="reveal">
               <div className="basis-full md:basis-5/12 pr-0 md:pr-8 border-none md:border-b-0 md:border-r md:border-sky-500/20 overflow-visible max-w-full flex justify-center py-0 sm:py-0 min-h-[400px] md:min-h-0 relative">
                 {/* Interactive Hint for Lanyard */}
-                {!isMobile && (
-                  <motion.div 
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 pointer-events-none"
-                  >
+                {!isMobile && showLanyardHint && (
+                  <div className="absolute inset-x-0 bottom-4 z-30 pointer-events-none">
                     <motion.div 
-                      animate={{ y: [0, -5, 0] }}
-                      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                      className="bg-black/60 backdrop-blur-xl border border-sky-500/30 px-4 py-2 rounded-full flex items-center gap-2 shadow-[0_0_20px_rgba(14,165,233,0.15)]"
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      viewport={{ once: true }}
+                      className="flex flex-col items-center"
                     >
-                      <div className="w-1.5 h-1.5 bg-sky-500 rounded-full animate-pulse" />
-                      <span className="text-[10px] font-black text-sky-400 uppercase tracking-[0.2em] whitespace-nowrap">Interactive: Drag Me</span>
+                      {/* Animated Ghost Cursor */}
+                      <motion.div
+                        animate={{ 
+                          x: [0, 35, -35, 20, -20, 0],
+                          y: [0, -25, 15, -10, 20, 0],
+                          rotate: [0, 15, -15, 10, -10, 0]
+                        }}
+                        transition={{ 
+                          duration: 4, 
+                          repeat: Infinity, 
+                          ease: "easeInOut" 
+                        }}
+                        className="relative mb-4"
+                      >
+                        <RiCursorFill className="text-sky-400 text-3xl drop-shadow-[0_0_12px_rgba(14,165,233,0.6)]" />
+                        {/* Ripple Effect */}
+                        <motion.div 
+                          animate={{ scale: [1, 1.8, 1], opacity: [0.5, 0, 0.5] }}
+                          transition={{ duration: 1.5, repeat: Infinity }}
+                          className="absolute -top-1 -right-1 w-4 h-4 bg-sky-500 rounded-full blur-sm"
+                        />
+                      </motion.div>
+
+                      {/* Pill Tag */}
+                      <motion.div 
+                        animate={{ y: [0, -5, 0] }}
+                        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                        className="bg-black/60 backdrop-blur-xl border border-sky-500/30 px-5 py-2 rounded-full flex items-center gap-3 shadow-[0_10px_30px_rgba(14,165,233,0.2)]"
+                      >
+                        <div className="w-1.5 h-1.5 bg-sky-500 rounded-full animate-pulse" />
+                        <span className="text-[10px] font-black text-sky-400 uppercase tracking-[0.3em] whitespace-nowrap">Play with Me</span>
+                      </motion.div>
                     </motion.div>
-                  </motion.div>
+                  </div>
                 )}
                 
                 {isMobile ? <Card3DViewer /> : <Lanyard position={[0, 0, 15]} gravity={[0, -40, 0]} />}
