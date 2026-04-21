@@ -36,11 +36,12 @@ export const listTools = [
   { id: 25, gambar: "https://cdn.simpleicons.org/socketdotio/white", nama: "Socket.io", ket: "Real-time Engine", dad: "2500" },
   { id: 26, gambar: "https://cdn.simpleicons.org/firebase/FFCA28", nama: "Firebase", ket: "Cloud Services", dad: "2600" },
 
-  // Tools & DevOps (ID 27-33 + 36, 37)
+  // Tools & DevOps (ID 27-33 + 36-39)
   { id: 27, gambar: "https://cdn.simpleicons.org/git/F05032", nama: "Git", ket: "Version Control", dad: "2700" },
   { id: 28, gambar: "https://cdn.simpleicons.org/github/white", nama: "GitHub", ket: "Code Hosting", dad: "2800" },
   { id: 29, gambar: "https://cdn.simpleicons.org/vercel/white", nama: "Vercel", ket: "Deployment Platform", dad: "2900" },
   { id: 30, gambar: "https://cdn.simpleicons.org/postman/FF6C37", nama: "Postman", ket: "API Testing", dad: "3000" },
+  { id: 39, gambar: "https://cdn.simpleicons.org/figma/F24E1E", nama: "Figma", ket: "UI/UX Design", dad: "3060" },
   { id: 31, gambar: "https://cdn.simpleicons.org/googlecloud/4285F4", nama: "GCP", ket: "Cloud Infrastructure", dad: "3100" },
   { id: 32, gambar: "https://cdn.simpleicons.org/ubuntu/E94321", nama: "Ubuntu", ket: "Linux OS", dad: "3200" },
   { id: 33, gambar: "https://cdn.simpleicons.org/docker/2496ED", nama: "Docker", ket: "Containerization", dad: "3300" },
@@ -49,6 +50,26 @@ export const listTools = [
 ];
 
 export const listProyek = [
+  {
+    id: 6,
+    image: "/assets/projects/pemdig/1.png",
+    video: "", 
+    title: "Klinik Pemerintah Digital",
+    subtitle: "Official Helpdesk Platform for Komdigi & Regional Governments",
+    fullDescription: "A strategic digital consultation platform developed for the Indonesian Ministry of Communication and Digital Affairs (Komdigi). It serves as a centralized helpdesk facilitating communication between regional and central governments to synchronize ICT implementation and digital governance across Indonesia.",
+    borderColor: "#2563EB",
+    gradient: "linear-gradient(145deg, #1E40AF, #000)",
+    url: "https://klinikpemdig.layanan.go.id/",
+    githubUrl: "",
+    images: [
+      "/assets/projects/pemdig/1.png",
+      "/assets/projects/pemdig/2.png",
+      "/assets/projects/pemdig/3.png",
+      "/assets/projects/pemdig/4.png",
+      "/assets/projects/pemdig/5.png"
+    ],
+    dad: "600",
+  },
   {
     id: 5,
     image: "/assets/projects/Finance Tracker/1.jpg",
@@ -143,9 +164,21 @@ export const listAchievements = [
     title: "Tsunami Risk Prediction using Machine Learning",
     journal: "IEEE Xplore",
     date: "2024",
-    description: "Research on predicting tsunami risks using historical BMKG data with XGBoost and Random Forest. Achieving AUC 0.96.",
+    description: "Elite-level Tsunami forecasting leveraging Ensemble Learning (XGBoost & Random Forest) on BMKG Big Data. Achieving a benchmark 0.96 AUC accuracy. Published internationally via IEEE.",
     url: "https://ieeexplore.ieee.org/abstract/document/11389449", 
+    buttonText: "ACCESS RESEARCH",
     dad: "1000",
+  },
+  {
+    type: "publication",
+    id: 5,
+    title: "Hishiro Helpdesk Web Application",
+    journal: "Hak Cipta (Intellectual Property)",
+    date: "2025",
+    description: "Granted Copyright (Nomor Permohonan: EC002025134733). Inventor: Antonius Jose Arviano Sundoro, Haniif Satria Wardana, Brandon, Harry Chiu, Ida Bagus Kerthyayana Manuaba.",
+    url: "https://pdki-indonesia.dgip.go.id:/link/45433030323032353133343733337c636f70797269676874", 
+    buttonText: "ACCESS LEGAL RECORD",
+    dad: "1050",
   },
   {
     type: "certificate",

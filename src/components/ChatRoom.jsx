@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { auth, loginWithGoogle, logout, db } from "../firebase";
+import { auth, loginWithGoogle, loginAnonymously, logout, db } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import {
   collection,
@@ -38,8 +38,8 @@ export default function ChatRoom() {
     await addDoc(collection(db, "messages"), {
       text: message,
       uid: user.uid,
-      displayName: user.displayName,
-      photoURL: user.photoURL,
+      displayName: user.displayName || "Stranger",
+      photoURL: user.photoURL || "https://api.dicebear.com/7.x/avataaars/svg?seed=Lucky",
       createdAt: serverTimestamp()
     });
     setMessage("");
@@ -55,12 +55,16 @@ export default function ChatRoom() {
       {user && (
         <div className="flex justify-between items-center mb-4 border-b border-gray-700 pb-3">
           <div className="flex items-center gap-3">
-            <img src={user.photoURL} alt="avatar" className="w-10 h-10 rounded-full" />
-            <span className="text-white font-semibold">{user.displayName}</span>
+            <img 
+              src={user.photoURL || "https://api.dicebear.com/7.x/avataaars/svg?seed=Lucky"} 
+              alt="avatar" 
+              className="w-10 h-10 rounded-full border border-gray-600" 
+            />
+            <span className="text-white font-semibold">{user.displayName || "Stranger (Guest)"}</span>
           </div>
           <button
             onClick={logout}
-            className="bg-red-600 px-4 py-1 rounded-full text-white hover:bg-red-700"
+            className="bg-red-600/20 text-red-400 border border-red-500/20 px-4 py-1 rounded-full hover:bg-red-600 hover:text-white transition-all text-sm"
           >
             Logout
           </button>
@@ -68,7 +72,7 @@ export default function ChatRoom() {
       )}
 
       {/* Area pesan */}
-      <div className="h-72 overflow-y-auto border border-gray-700 p-3 rounded-lg bg-zinc-800 mb-4 space-y-3">
+      <div className="h-72 overflow-y-auto border border-gray-700 p-3 rounded-lg bg-zinc-800/50 mb-4 space-y-3 scrollbar-hide">
         {messages.map((msg) => (
           <div
             key={msg.id}
@@ -76,35 +80,28 @@ export default function ChatRoom() {
           >
             {msg.uid !== user?.uid && (
               <img
-                src={msg.photoURL || "https://via.placeholder.com/40"}
+                src={msg.photoURL || "https://api.dicebear.com/7.x/avataaars/svg?seed=Lucky"}
                 alt="avatar"
                 className="w-8 h-8 rounded-full"
               />
             )}
             <div
-              className={`p-3 rounded-lg max-w-[75%] ${
+              className={`p-3 rounded-xl max-w-[75%] ${
                 msg.uid === user?.uid
                   ? "bg-sky-500 text-black shadow-[0_0_15px_rgba(137,207,240,0.3)]"
-                  : "bg-gray-700 text-white"
+                  : "bg-zinc-700 text-white"
               }`}
             >
-              <div className="text-xs opacity-70 mb-1">{msg.displayName}</div>
-              <div>{msg.text}</div>
+              <div className="text-[10px] uppercase font-bold opacity-50 mb-1">{msg.displayName}</div>
+              <div className="text-sm">{msg.text}</div>
             </div>
-            {msg.uid === user?.uid && (
-              <img
-                src={msg.photoURL || "https://via.placeholder.com/40"}
-                alt="avatar"
-                className="w-8 h-8 rounded-full"
-              />
-            )}
           </div>
         ))}
       </div>
 
       {/* Form login / kirim pesan */}
       {user ? (
-        <form onSubmit={sendMessage} className="flex gap-2 flex-wrap sm:flex-nowrap w-full">
+        <form onSubmit={sendMessage} className="flex gap-2 w-full">
           <input
             type="text"
             value={message}
@@ -114,16 +111,16 @@ export default function ChatRoom() {
           />
           <button
             type="submit"
-            className="bg-sky-600 px-4 py-2 rounded-lg text-white hover:bg-sky-700 w-full sm:w-auto"
+            className="bg-sky-600 px-6 rounded-xl text-white font-bold hover:bg-sky-500 transition-all active:scale-95"
           >
             Send
           </button>
         </form>
       ) : (
-        <div className="flex flex-col items-center justify-center gap-4">
+        <div className="flex flex-col items-center justify-center gap-3">
           <button
             onClick={loginWithGoogle}
-            className="flex items-center gap-3 bg-white text-gray-800 px-5 py-2 rounded-full shadow hover:bg-gray-200 transition"
+            className="w-full flex items-center justify-center gap-3 bg-white text-gray-800 px-5 py-3 rounded-xl shadow-lg hover:bg-gray-100 transition-all font-bold"
           >
             <img
               src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
@@ -132,7 +129,21 @@ export default function ChatRoom() {
             />
             Login with Google
           </button>
-          <p className="text-sm text-gray-400 italic">Join the conversation to say hello!</p>
+          
+          <div className="flex items-center gap-2 w-full opacity-30 my-1">
+            <div className="flex-1 h-[1px] bg-white"></div>
+            <span className="text-xs uppercase font-bold text-white">OR</span>
+            <div className="flex-1 h-[1px] bg-white"></div>
+          </div>
+
+          <button
+            onClick={loginAnonymously}
+            className="w-full bg-zinc-800 text-white border border-gray-700 px-5 py-3 rounded-xl hover:bg-zinc-700 transition-all font-bold"
+          >
+            Join as Guest (Stranger)
+          </button>
+          
+          <p className="text-xs text-gray-500 italic">No account needed to say hi!</p>
         </div>
       )}
     </div>

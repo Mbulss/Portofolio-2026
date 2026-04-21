@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { FiExternalLink, FiGithub } from "react-icons/fi";
 import { gsap } from "gsap";
 import "./ChromaGrid.css";
 
@@ -160,8 +161,8 @@ export const ChromaGrid = ({
             <div className="chroma-img-wrapper">
                <ProjectPreview c={c} />
             </div>
-          <footer className="chroma-info flex flex-col h-full">
-            <div className="flex flex-col">
+          <footer className="chroma-info flex flex-col flex-grow">
+            <div className="flex-grow flex flex-col">
               {/* Fixed height title wrapper so 1-line and 2-line titles take the same space */}
               <div className="h-[60px] flex items-start">
                 <h3 className="name line-clamp-2">{c.title}</h3>
@@ -184,16 +185,17 @@ export const ChromaGrid = ({
               </div>
             </div>
 
-            <div className="flex gap-3 pt-4 border-t border-white/5">
+            <div className="flex gap-3 pt-4 border-t border-white/5 mt-auto">
               {c.url && (
                 <a 
                   href={c.url} 
                   target="_blank" 
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="flex-1 flex justify-center items-center bg-sky-500/10 text-sky-400 hover:bg-sky-500 hover:text-black border border-sky-500/20 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-300 group/btn"
+                  className="flex-1 flex justify-center items-center gap-2 bg-sky-500/10 text-sky-400 hover:bg-sky-500 hover:text-black border border-sky-500/20 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-300 group/btn"
                 >
-                  Live Demo
+                  <FiExternalLink size={14} />
+                  <span>Live Demo</span>
                 </a>
               )}
               {c.githubUrl && (
@@ -202,9 +204,10 @@ export const ChromaGrid = ({
                   target="_blank" 
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="flex-1 flex justify-center items-center bg-zinc-800/50 hover:bg-zinc-700 text-white border border-white/5 hover:border-white/20 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-300"
+                  className="flex-1 flex justify-center items-center gap-2 bg-zinc-800/50 hover:bg-zinc-700 text-white border border-white/5 hover:border-white/20 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-300"
                 >
-                  GitHub
+                  <FiGithub size={14} />
+                  <span>Code</span>
                 </a>
               )}
             </div>

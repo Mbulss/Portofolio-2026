@@ -46,12 +46,20 @@ function CardModel({ hovered }) {
 
 export default function Card3DViewer() {
   const [hovered, setHovered] = useState(false);
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
 
   return (
     <div className="card-viewer-container">
       <Canvas 
         shadows 
-        gl={{ antialias: true, alpha: true, stencil: false, depth: true }}
+        gl={{ 
+          antialias: !isMobile, 
+          alpha: true, 
+          stencil: false, 
+          depth: true,
+          powerPreference: "high-performance" 
+        }}
+        dpr={isMobile ? 1 : [1, 2]}
         onPointerOver={() => setHovered(true)}
         onPointerOut={() => setHovered(false)}
       >

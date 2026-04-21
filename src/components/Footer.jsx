@@ -5,23 +5,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const Footer = () => {
-  const nameRef = useRef(null);
-
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-    
-    gsap.to(nameRef.current, {
-      scrollTrigger: {
-        trigger: nameRef.current,
-        start: "top bottom",
-        end: "bottom top",
-        scrub: 1,
-      },
-      y: -100,
-      ease: "none"
-    });
-  }, []);
-
   return (
     <div className="mt-32 pb-16 flex flex-col items-center relative z-10 w-full overflow-hidden">
       {/* Massive Name Display with Robot Full Width */}
@@ -32,8 +15,7 @@ const Footer = () => {
         </div>
         
         <h1 
-          ref={nameRef}
-          className="text-[15vw] md:text-[20vw] font-black leading-none tracking-tighter text-white opacity-95 select-none text-center z-10 translate-y-[-2vh] md:translate-y-0"
+          className="text-[clamp(3.5rem,18vw,22rem)] font-black leading-none tracking-tighter text-white opacity-95 select-none text-center z-10 translate-y-[-2vh] md:translate-y-0"
         >
           HANIIF
         </h1>

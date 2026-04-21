@@ -49,7 +49,7 @@ const ProjectModal = ({ isOpen, onClose, project }) => {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className={`bg-zinc-950 border border-white/10 rounded-3xl shadow-2xl shadow-sky-500/10 w-full max-w-[440px] max-h-[90vh] flex flex-col overflow-hidden transform transition-all duration-300 ${isClosing ? 'animate-out' : 'animate-in'}`}
+        className={`bg-zinc-950 border border-white/10 rounded-3xl shadow-2xl shadow-sky-500/10 w-full max-w-[550px] md:max-w-[700px] max-h-[90vh] flex flex-col overflow-hidden transform transition-all duration-300 ${isClosing ? 'animate-out' : 'animate-in'}`}
       >
         {/* --- HEADER MEDIA (Gallery / Video / Single) --- */}
         <div className="relative w-full aspect-video flex-shrink-0 bg-zinc-900 overflow-hidden border-b border-white/5 group">
@@ -70,9 +70,9 @@ const ProjectModal = ({ isOpen, onClose, project }) => {
                 <motion.img
                   key={currentImgIndex}
                   src={project.images[currentImgIndex]}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
+                  initial={{ opacity: 0, scale: 1.05 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.3 }}
                   className="w-full h-full object-contain bg-black"
                 />
@@ -83,19 +83,19 @@ const ProjectModal = ({ isOpen, onClose, project }) => {
                 <>
                   <button 
                     onClick={prevImg}
-                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-sky-500 text-white p-1.5 rounded-full backdrop-blur-md transition-all opacity-0 group-hover:opacity-100 hidden sm:block z-10"
+                    className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-sky-500 text-white p-2 rounded-full backdrop-blur-md transition-all opacity-0 group-hover:opacity-100 hidden md:block z-10"
                   >
-                    <FiChevronLeft size={20} />
+                    <FiChevronLeft size={24} />
                   </button>
                   <button 
                     onClick={nextImg}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-sky-500 text-white p-1.5 rounded-full backdrop-blur-md transition-all opacity-0 group-hover:opacity-100 hidden sm:block z-10"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-sky-500 text-white p-2 rounded-full backdrop-blur-md transition-all opacity-0 group-hover:opacity-100 hidden md:block z-10"
                   >
-                    <FiChevronRight size={20} />
+                    <FiChevronRight size={24} />
                   </button>
                   
                   {/* Indicators / Dots */}
-                  <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
                     {project.images.map((_, i) => (
                       <button
                         key={i}
@@ -103,7 +103,7 @@ const ProjectModal = ({ isOpen, onClose, project }) => {
                           e.stopPropagation();
                           setCurrentImgIndex(i);
                         }}
-                        className={`h-1 rounded-full transition-all duration-300 ${i === currentImgIndex ? 'w-4 bg-sky-500' : 'w-1.5 bg-white/30'}`}
+                        className={`h-1.5 rounded-full transition-all duration-300 ${i === currentImgIndex ? 'w-6 bg-sky-500' : 'w-2 bg-white/30'}`}
                       />
                     ))}
                   </div>
@@ -120,46 +120,46 @@ const ProjectModal = ({ isOpen, onClose, project }) => {
           
           <button
             onClick={handleClose}
-            className="absolute top-4 right-4 bg-black/60 backdrop-blur-xl text-white p-2 rounded-full hover:bg-sky-500 transition-all z-20 border border-white/10 shadow-lg"
+            className="absolute top-4 right-4 bg-black/60 backdrop-blur-xl text-white p-2.5 rounded-full hover:bg-sky-500 transition-all z-20 border border-white/10 shadow-lg"
           >
-            <FiX size={18} />
+            <FiX size={20} />
           </button>
         </div>
 
         {/* --- CONTENT --- */}
-        <div className="p-6 sm:p-5 flex-grow overflow-y-auto project-modal-scroll">
-          <div className="flex flex-col gap-4">
-            <h2 className="text-[1.5rem] sm:text-[1.1rem] font-bold text-white leading-tight">
+        <div className="p-6 md:p-8 overflow-y-auto project-modal-scroll">
+          <div className="flex flex-col gap-5">
+            <h2 className="text-xl md:text-2xl font-black text-white leading-tight uppercase tracking-tight">
               {project.title}
             </h2>
 
-            <p className="text-zinc-400 text-[14px] sm:text-[12px] leading-relaxed font-normal">
+            <p className="text-zinc-400 text-sm md:text-base leading-relaxed font-normal">
               {project.fullDescription}
             </p>
 
-            <div className="flex flex-col gap-2 mt-4 pt-4 border-t border-white/5 sm:border-t-0 sm:pt-0 sm:flex-row">
+            <div className="mt-4 pt-6 border-t border-white/5 flex flex-col sm:grid sm:grid-cols-2 gap-4">
               {project.url && (
                 <a
                   href={project.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-[1.5] inline-flex items-center justify-center gap-2 font-bold bg-sky-500 text-black py-3 sm:py-2 rounded-xl sm:rounded-lg hover:bg-sky-400 transition-all duration-300 text-sm sm:text-[11px]"
+                  className="inline-flex items-center justify-center gap-3 font-black uppercase tracking-widest bg-sky-500 text-black py-4 rounded-xl hover:bg-white transition-all duration-300 text-xs shadow-[0_0_20px_rgba(14,165,233,0.3)]"
                 >
-                  <FiExternalLink size={16} className="sm:size-[12px]" />
-                  <span className="whitespace-nowrap italic">Live Demo</span>
+                  <FiExternalLink size={18} />
+                  <span>Live Demo</span>
                 </a>
               )}
               
-              <div className="flex flex-row gap-2 flex-grow">
+              <div className={`flex gap-4 ${!project.url ? 'col-span-full' : ''}`}>
                 {project.githubUrl && (
                   <a
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`flex-1 inline-flex items-center justify-center gap-2 font-bold bg-zinc-900 text-white py-3 sm:py-2 rounded-xl sm:rounded-lg border border-white/10 hover:bg-zinc-800 transition-all duration-300 text-sm sm:text-[11px] ${!project.url ? 'flex-[2]' : ''}`}
+                    className="flex-1 inline-flex items-center justify-center gap-2 font-black uppercase tracking-widest bg-zinc-800 text-white border border-white/5 py-4 rounded-xl hover:bg-zinc-700 transition-all duration-300 text-xs"
                   >
-                    <FiGithub size={16} className="sm:size-[12px]" />
-                    <span className="whitespace-nowrap">Code</span>
+                    <FiGithub size={18} />
+                    <span>Code Repository</span>
                   </a>
                 )}
 
@@ -168,10 +168,10 @@ const ProjectModal = ({ isOpen, onClose, project }) => {
                     href={project.paperUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 inline-flex items-center justify-center gap-2 font-bold bg-white/5 text-zinc-300 py-3 sm:py-2 rounded-xl sm:rounded-lg border border-white/10 hover:bg-white/10 transition-all duration-300 text-sm sm:text-[11px]"
+                    className="flex-1 inline-flex items-center justify-center gap-2 font-black uppercase tracking-widest bg-white/5 text-zinc-300 border border-white/10 py-4 rounded-xl hover:bg-white/10 transition-all duration-300 text-xs"
                   >
-                    <FiFileText size={16} className="sm:size-[12px]" />
-                    <span className="whitespace-nowrap">Paper</span>
+                    <FiFileText size={18} />
+                    <span>Research Paper</span>
                   </a>
                 )}
               </div>

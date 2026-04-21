@@ -6,10 +6,22 @@
   }
 
   body {
-    font-family: "Poppins", sans-serif;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: #050505;
+  color: white;
+  overflow-x: hidden;
+  width: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Force word breaks on long titles for mobile safety */
+h1, h2, h3, h4, h5, h6, p, span {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
     overflow-y: auto;
     position: relative;
     width: 100%;

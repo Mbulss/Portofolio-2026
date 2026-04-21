@@ -187,13 +187,26 @@ export default function Aurora(props) {
       });
       renderer.render({ scene: mesh });
     };
-    animateId = requestAnimationFrame(update);
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          if (!animateId) animateId = requestAnimationFrame(update);
+        } else {
+          cancelAnimationFrame(animateId);
+          animateId = 0;
+        }
+      },
+      { threshold: 0.01 }
+    );
+    observer.observe(ctn);
 
     resize();
 
     return () => {
       cancelAnimationFrame(animateId);
       window.removeEventListener("resize", resize);
+      observer.disconnect();
       if (ctn && gl.canvas.parentNode === ctn) {
         ctn.removeChild(gl.canvas);
       }

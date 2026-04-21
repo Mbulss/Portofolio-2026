@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import {
   motion,
   useScroll,
@@ -35,29 +35,32 @@ function ParallaxText({ children, baseVelocity = 100 }) {
   const x = useTransform(baseX, (v) => `${wrap(-20, -90, v)}%`);
 
   const directionFactor = useRef(1);
-  useAnimationFrame((t, delta) => {
-    let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
+  const containerRef = useRef(null);
+  const [isInView, setIsInView] = useState(false);
 
-    /**
-     * This is what changes the direction of the scroll based on
-     * the scroll velocity.
-     */
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      setIsInView(entry.isIntersecting);
+    }, { threshold: 0.1 });
+    if (containerRef.current) observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  useAnimationFrame((t, delta) => {
+    if (!isInView) return;
+    
+    let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
     if (velocityFactor.get() < 0) {
       directionFactor.current = -1;
     } else if (velocityFactor.get() > 0) {
       directionFactor.current = 1;
     }
-
     moveBy += directionFactor.current * moveBy * velocityFactor.get();
-
     baseX.set(baseX.get() + moveBy);
   });
 
-  /**
-   * The number of times the text repeats, adjust as needed.
-   */
   return (
-    <div className="parallax" style={{ overflow: 'hidden', maskImage: 'linear-gradient(to right, transparent, black 2%, black 98%, transparent)', WebkitMaskImage: 'linear-gradient(to right, transparent, black 2%, black 98%, transparent)' }}>
+    <div ref={containerRef} className="parallax" style={{ overflow: 'hidden', maskImage: 'linear-gradient(to right, transparent, black 2%, black 98%, transparent)', WebkitMaskImage: 'linear-gradient(to right, transparent, black 2%, black 98%, transparent)' }}>
       <motion.div className="scroller" style={{ x, display: 'flex', whiteSpace: 'nowrap' }}>
         <span>{children} </span>
         <span>{children} </span>

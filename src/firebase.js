@@ -1,6 +1,6 @@
 // src/firebase.js
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, signInAnonymously } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
 
@@ -33,6 +33,17 @@ export const loginWithGoogle = async () => {
     } else {
       alert("Login gagal: " + error.message);
     }
+    throw error;
+  }
+};
+
+export const loginAnonymously = async () => {
+  try {
+    const result = await signInAnonymously(auth);
+    return result.user;
+  } catch (error) {
+    console.error("Firebase Anonymous Login Error:", error);
+    alert("Gagal masuk sebagai anonim. Pastikan 'Anonymous' sudah diaktifkan di Firebase Console (Authentication > Sign-in method).");
     throw error;
   }
 };
