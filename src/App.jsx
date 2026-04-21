@@ -31,6 +31,7 @@ const MemoizedBlurText = memo(BlurText);
 
 function App() {
   const aboutRef = useRef(null);
+  const toolsRef = useRef(null);
   const [selectedProject, setSelectedProject] = useState(null);
   const [searchSource, setSearchSource] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -227,13 +228,14 @@ function App() {
                         key={i}
                         className="flex flex-col items-center p-4 px-6 rounded-2xl bg-white/5 border border-white/5 hover:border-sky-500/30 hover:bg-sky-500/5 transition-all duration-300 group/stat"
                       >
-                        <h1 className="text-2xl md:text-3xl font-black mb-1 mt-0 group-hover:scale-105 transition-transform flex items-baseline">
+                        <h1 className="text-2xl md:text-3xl font-black mb-1 mt-0 group-hover:scale-105 transition-transform flex items-baseline whitespace-nowrap">
                           <CountUp
                             to={stat.val}
                             duration={2}
+                            decimals={stat.val % 1 !== 0 ? 2 : 0}
                             separator=","
                           />
-                          <span className="text-sky-500 text-xl ml-1">{stat.suffix}</span>
+                          <span className="text-sky-500 text-base md:text-xl ml-1">{stat.suffix}</span>
                         </h1>
                         <p className="m-0 opacity-40 text-[10px] uppercase tracking-[0.2em] font-bold group-hover:opacity-80 transition-opacity text-center leading-tight">{stat.label}</p>
                       </div>
@@ -250,7 +252,7 @@ function App() {
         {/* Tools Section */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="tools mt-10">
-            <h1 className="text-3xl md:text-4xl font-black mb-6 tracking-tight bg-gradient-to-b from-white to-white/40 bg-clip-text text-transparent uppercase" data-gsap="reveal">
+            <h1 ref={toolsRef} className="text-3xl md:text-4xl font-black mb-6 tracking-tight bg-gradient-to-b from-white to-white/40 bg-clip-text text-transparent uppercase scroll-mt-32" data-gsap="reveal">
               Tools & Technologies
             </h1>
             
@@ -313,7 +315,15 @@ function App() {
                   </div>
 
                   {!searchSource && selectedCategory === "All" && hasMoreTools && (
-                    <button onClick={() => setIsToolsExpanded(!isToolsExpanded)} className="bg-zinc-900/50 hover:bg-zinc-800 border border-zinc-800 p-3 px-8 rounded-full text-sky-500 font-semibold transition-all duration-300 flex items-center gap-2">
+                    <button 
+                      onClick={() => {
+                        if (isToolsExpanded) {
+                          toolsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                        setIsToolsExpanded(!isToolsExpanded);
+                      }} 
+                      className="bg-zinc-900/50 hover:bg-zinc-800 border border-zinc-800 p-3 px-8 rounded-full text-sky-500 font-semibold transition-all duration-300 flex items-center gap-2"
+                    >
                       <span>{isToolsExpanded ? "Show Less" : "Show All"}</span>
                     </button>
                   )}
