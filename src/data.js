@@ -124,14 +124,15 @@ export const listProyek = [
     fullDescription: "A high-performance enterprise support platform. Features a powerful centralized administrative dashboard, real-time customer engagement through live chat, and an intelligent AI assistant designed to resolve inquiries instantly.",
     borderColor: "#89CFF0",
     gradient: "linear-gradient(180deg, #89CFF0, #000)",
-    url: "https://hishiro-ticketing-system.up.railway.app/",
+    url: "https://hishiro-ticketing-system.vercel.app/",
     githubUrl: "https://github.com/Mbulss/Hishiro-Ticketing-System.git",
     images: [
       "/assets/projects/hishiro/1.png",
       "/assets/projects/hishiro/2.png",
       "/assets/projects/hishiro/3.png",
       "/assets/projects/hishiro/4.jpg",
-      "/assets/projects/hishiro/5.png"
+      "/assets/projects/hishiro/5.png",
+      "/assets/projects/hishiro/6.jpeg"
     ],
     dad: "200",
   },
