@@ -249,14 +249,14 @@ function App() {
                     About Me
                   </h2>
                   <p className="text-sm sm:text-base md:text-lg leading-relaxed mb-10 text-gray-300">
-                    Yo, I’m Haniif Satria Wardana! Currently pulling a Double Degree in Computer Science at Binus International and AI at RMIT Melbourne. I’m basically obsessed with learning new tech stacks and bridging the gap between heavy-duty backend models and those clean, aesthetic frontend designs.
+                    Hello, I’m Haniif Satria Wardana! Currently pulling a Double Degree in Computer Science at Binus International and AI at RMIT Melbourne. I’m basically obsessed with learning new tech stacks and bridging the gap between heavy-duty backend models and those clean, aesthetic frontend designs.
                   </p>
 
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4 w-full">
                     {[
                       { val: 30, suffix: "+", label: "Project Finished" },
                       { val: 3, suffix: "+", label: "Years of Experience" },
-                      { val: 3.57, suffix: "/4.00", label: "GPA" }
+                      { val: 3.63, suffix: "/4.00", label: "GPA" }
                     ].map((stat, i) => (
                       <div 
                         key={i}

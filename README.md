@@ -1,59 +1,59 @@
-# Haniif Portofolio — [Haniif Satria Wardana / Mbulss]
+# Haniif Portfolio — [Haniif Satria Wardana / Mbulss]
 
-Selamat datang di portofolio web pribadi saya! 🌐  
-Dibuat dengan React + Vite, ini adalah showcase dari project, skill, dan karya yang ingin saya bagikan.
+Welcome to my personal web portfolio! 🌐  
+Built with React + Vite, this is a showcase of my projects, skills, and work.
 
-##  Struktur Project
+## 📁 Project Structure
 
-- `public/` — file statis (favicon, assets, dsb.)  
-- `src/` — code utama React (komponen, utilitas, dsb.)  
-- `index.html` — entry point halaman web  
-- `package.json` & `package-lock.json` — manajemen dependencies dan script  
-- `vite.config.js` — konfigurasi build dan dev server Vite  
-- `eslint.config.js` — aturan linting agar kodenya tetap bersih dan konsisten  
+- `public/` — static assets (favicon, images, etc.)  
+- `src/` — main React code (components, utilities, styles, etc.)  
+- `index.html` — web page entry point  
+- `package.json` & `package-lock.json` — dependency management and scripts  
+- `vite.config.js` — Vite build and dev server configuration  
+- `eslint.config.js` — linting rules to keep the codebase clean and consistent  
 
-##  Fitur Utama
+## ✨ Key Features
 
-- Dibangun dengan **React + Vite** — ringan, cepat reload, dan performa build optimal  
-- **ESLint** telah terkonfigurasi agar coding style tetap rapi  
-- Struktur modular dan siap dikembangkan—bisa ditambahkan halaman “About”, “Projects”, dsb.
+- Built with **React + Vite** — lightweight, fast hot-reloading, and optimal build performance  
+- **ESLint** configured for clean, consistent code style  
+- Modular and scalable architecture — easy to expand with additional sections and features  
 
-##  Cara Jalankan
+## 🚀 How to Run
 
-1. Clone repository ini:
+1. Clone this repository:
 ```bash
 git clone https://github.com/Mbulss/portofolio.git
 cd portofolio
-````
+```
 
 2. Install dependencies:
 ```bash
 npm install
-````
+```
 
-3. Jalankan server lokal dengan hot reload:
+3. Run the local development server with hot reload:
 ```bash
 npm run dev
-````
+```
 
-4. Buat versi production:
+4. Build for production:
 ```bash
 npm run build
-````
+```
 
-## &#x20;Quick Preview
+## 🔗 Quick Preview
 
-Jika sudah di-deploy (contoh: GitHub Pages, Netlify, Vercel), kamu bisa tambahkan link deploy di sini, misalnya:
-[🔗 Lihat versi live](https://username.github.io/portofolio/)
+Check out the live deployment here:  
+[🔗 View Live Portfolio](https://github.com/Mbulss/Portofolio-2026)
 
-## Tentang Saya
+## 👨‍💻 About Me
 
-Hai, saya Haniif Satria Wardana (username GitHub: `Mbulss`).
-Saya seorang Computer Scientist yang suka bikin aplikasi web modern dan AI. Scroll aja di project saya, dan jangan sungkan untuk reach out kalau ada pertanyaan!
+Hi, I'm Haniif Satria Wardana (GitHub: `Mbulss`).  
+I'm a Computer Scientist passionate about building modern web applications and AI solutions. Feel free to explore my projects and reach out if you have any questions!
 
 * **Email:** [niifw39@gmail.com](mailto:niifw39@gmail.com)
 * **LinkedIn:** [linkedin.com/in/haniif-satria-wardana/](https://www.linkedin.com/in/haniif-satria-wardana/)
-* **Instagram:** @haniifwardana
+* **Instagram:** [@haniifwardana](https://instagram.com/haniifwardana)
 
 ---
 
